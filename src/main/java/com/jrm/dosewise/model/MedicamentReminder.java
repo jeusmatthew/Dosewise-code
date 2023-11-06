@@ -14,7 +14,6 @@ public class MedicamentReminder {
         this.medicament = medicament;
 
         // Generating alarms
-        // TODO: ALAVERGA ME GENERO ESTO AAAAAAAAAAAAAAAAAAA
         for (int i = 0; i < dosage.getTotalTakes(); i++) {
             MedicamentAlarm alarm = new MedicamentAlarm();
             alarm.setMessage(medicament.getName());
