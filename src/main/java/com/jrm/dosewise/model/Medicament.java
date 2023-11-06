@@ -5,6 +5,11 @@ public class Medicament {
     private String description;
     private String compound;
 
+    public Medicament(String name, String description, String compound) {
+        this.name = name;
+        this.description = description;
+        this.compound = compound;
+    }
     public String getName() {
         return name;
     }

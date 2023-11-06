@@ -9,7 +9,7 @@ public class MedicamentReminder {
     private Dosage dosage;
     private Medicament medicament;
 
-    public void initialize(Dosage dosage, Medicament medicament) {
+    public MedicamentReminder(Dosage dosage, Medicament medicament) {
         this.dosage = dosage;
         this.medicament = medicament;
 
@@ -22,7 +22,7 @@ public class MedicamentReminder {
             alarms.add(alarm);
         }
     }
-    
+
     public void ringAlarm() {
         alarms.get(0).ring();
     }
