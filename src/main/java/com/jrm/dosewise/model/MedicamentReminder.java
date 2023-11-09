@@ -9,12 +9,11 @@ public class MedicamentReminder {
     private Dosage dosage;
     private Medicament medicament;
 
-    public void initialize(Dosage dosage, Medicament medicament) {
+    public MedicamentReminder(Dosage dosage, Medicament medicament) {
         this.dosage = dosage;
         this.medicament = medicament;
 
         // Generating alarms
-        // TODO: ALAVERGA ME GENERO ESTO AAAAAAAAAAAAAAAAAAA
         for (int i = 0; i < dosage.getTotalTakes(); i++) {
             MedicamentAlarm alarm = new MedicamentAlarm();
             alarm.setMessage(medicament.getName());
@@ -22,7 +21,7 @@ public class MedicamentReminder {
             alarms.add(alarm);
         }
     }
-    
+
     public void ringAlarm() {
         alarms.get(0).ring();
     }
