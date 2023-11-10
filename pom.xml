@@ -9,7 +9,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+<<<<<<< HEAD
         <exec.mainClass>com.jrm.dosewise.DosewiseMain</exec.mainClass>
+=======
+        <exec.mainClass>com.jrm.dosewise.DoseWise</exec.mainClass>
+>>>>>>> 413ad2633e29bc15679b8d9bb580a622e863618e
     </properties>
     
     <dependencies>
