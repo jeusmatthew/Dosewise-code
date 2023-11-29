@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\model\AlarmObserver.java
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\DoseWise.java
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\model\Medicament.java
@@ -5,3 +6,18 @@ C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\model\AlarmModelInterface.java
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\model\Dosage.java
 C:\Users\jeusm.MASTER\Documents\NetBeansProjects\DoseWise\src\main\java\com\jrm\dosewise\model\AlarmModel.java
+=======
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\Observable.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\Medicament.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\controller\UserMedicationController.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\Dosage.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\view\demoInterface.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\DosagePerHour.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\MedicamentReminder.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\DosagePerDay.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\UserMedication.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\model\MedicamentAlarm.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\DosewiseMain.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\view\ConsoleView.java
+E:\Documents\GitHub\Dosewise-code\src\main\java\com\jrm\dosewise\view\Observer.java
+>>>>>>> Stashed changes

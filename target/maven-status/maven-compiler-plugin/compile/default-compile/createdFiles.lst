@@ -1,0 +1,17 @@
+<<<<<<< Updated upstream
+=======
+com\jrm\dosewise\DosewiseMain.class
+com\jrm\dosewise\view\Observer.class
+com\jrm\dosewise\model\MedicamentAlarm.class
+com\jrm\dosewise\model\MedicamentReminder.class
+com\jrm\dosewise\model\UserMedication.class
+com\jrm\dosewise\controller\UserMedicationController.class
+com\jrm\dosewise\model\Dosage.class
+com\jrm\dosewise\model\DosagePerDay.class
+demoInterface$1.class
+com\jrm\dosewise\model\Medicament.class
+demoInterface.class
+com\jrm\dosewise\model\DosagePerHour.class
+com\jrm\dosewise\view\ConsoleView.class
+com\jrm\dosewise\model\Observable.class
+>>>>>>> Stashed changes
