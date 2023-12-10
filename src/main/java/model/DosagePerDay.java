@@ -1,4 +1,4 @@
-package com.jrm.dosewise.model;
+package model;
 
 public class DosagePerDay implements Dosage{
     private int days;

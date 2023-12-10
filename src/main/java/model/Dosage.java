@@ -1,4 +1,4 @@
-package com.jrm.dosewise.model;
+package model;
 
 public interface Dosage {
     public int getTakePeriod();

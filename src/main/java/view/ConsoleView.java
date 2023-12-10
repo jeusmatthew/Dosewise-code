@@ -1,26 +1,24 @@
-package com.jrm.dosewise.view;
+package view;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.jrm.dosewise.controller.UserMedicationController;
-import com.jrm.dosewise.model.Dosage;
-import com.jrm.dosewise.model.DosagePerHour;
-import com.jrm.dosewise.model.Medicament;
-import com.jrm.dosewise.model.MedicamentReminder;
-import com.jrm.dosewise.model.UserMedication;
+import controller.Controller;
+import model.Dosage;
+import model.DosagePerHour;
+import model.Medicament;
+import model.AlarmsRoutine;
+import model.MedicamentList;
 
-public class ConsoleView implements Observer {
-    private UserMedication model;
-    private UserMedicationController controller;
+public class ConsoleView {
+    private MedicamentList model;
+    private Controller controller;
 
-    public ConsoleView(UserMedication model, UserMedicationController controller) {
+    public ConsoleView(MedicamentList model, Controller controller) {
         this.model = model;
         this.controller = controller;
-        model.registerObserver(this);
     }
 
-    @Override
     public void update() {
         System.out.println("Medication list updated");
         controller.getMedicationList().forEach(m -> System.out.println(m));
@@ -47,7 +45,7 @@ public class ConsoleView implements Observer {
                     int hours = sc.nextInt();
                     int days = sc.nextInt();
                     Dosage dosagePerHour = new DosagePerHour(hours, days);
-                    MedicamentReminder medication = new MedicamentReminder(dosagePerHour, medicament);
+                    AlarmsRoutine medication = new AlarmsRoutine(dosagePerHour, medicament);
                     controller.addMedication(medication);
                     System.out.println("Medication " + name + " added");
                     break;
@@ -64,10 +62,13 @@ public class ConsoleView implements Observer {
                 case 3:
                     System.out.println("Medication name: ");
                     name = sc.next();
+                    System.out.println("index");
+                    int i = sc.nextInt();
                     medicament = new Medicament(name, "description", "compound");
                     dosagePerHour = new DosagePerHour(1, 1);
-                    medication = new MedicamentReminder(dosagePerHour, medicament);
-                    controller.updateMedication(medication);
+                    medication = new AlarmsRoutine(dosagePerHour, medicament);
+
+                    controller.updateMedication(i, medication); 
                     System.out.println("Medication " + name + " updated");
                     break;
 
