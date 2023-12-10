@@ -1,21 +1,21 @@
-package com.jrm.dosewise.model;
+package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicamentReminder {
-    private List<MedicamentAlarm> alarms = new ArrayList<MedicamentAlarm>();
+public class AlarmsRoutine {
+    private List<Alarm> alarms = new ArrayList<Alarm>();
     private Dosage dosage;
     private Medicament medicament;
 
-    public MedicamentReminder(Dosage dosage, Medicament medicament) {
+    public AlarmsRoutine(Dosage dosage, Medicament medicament) {
         this.dosage = dosage;
         this.medicament = medicament;
 
         // Generating alarms
         for (int i = 0; i < dosage.getTotalTakes(); i++) {
-            MedicamentAlarm alarm = new MedicamentAlarm();
+            Alarm alarm = new Alarm();
             alarm.setMessage(medicament.getName());
             alarm.setTime(LocalDateTime.now().plusHours(dosage.getTakePeriod() * i));
             alarms.add(alarm);
@@ -26,33 +26,41 @@ public class MedicamentReminder {
         alarms.get(0).ring();
     }
 
+    public void ringAlarm(int index) {
+        alarms.get(index).ring();
+    }
+
+    public void ringAlarm(Alarm a) {
+        a.ring();
+    }
+
     public void setAllAlarmsActive(boolean active) {
-        for (MedicamentAlarm alarm : alarms) {
+        for (Alarm alarm : alarms) {
             alarm.setActive(active);
         }
     }
 
     public void setAllAlarmsMessage(String message) {
-        for (MedicamentAlarm alarm : alarms) {
+        for (Alarm alarm : alarms) {
             alarm.setMessage(message);
         }
     }
 
     public void setAllAlarmsTime(LocalDateTime time) {
-        for (MedicamentAlarm alarm : alarms) {
+        for (Alarm alarm : alarms) {
             alarm.setTime(time);
         }
     }
 
-    public void removeAlarm(MedicamentAlarm alarm) {
+    public void removeAlarm(Alarm alarm) {
         alarms.remove(alarm);
     }
 
-    public List<MedicamentAlarm> getAlarms() {
+    public List<Alarm> getAlarms() {
         return alarms;
     }
 
-    public void setAlarms(List<MedicamentAlarm> alarms) {
+    public void setAlarms(List<Alarm> alarms) {
         this.alarms = alarms;
     }
 
