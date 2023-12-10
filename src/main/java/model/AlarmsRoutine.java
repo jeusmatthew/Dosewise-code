@@ -1,19 +1,20 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 public class AlarmsRoutine {
-    private List<Alarm> alarms = new ArrayList<Alarm>();
+    private Stack<Alarm> alarms = new Stack<>();
     private Dosage dosage;
     private Medicament medicament;
 
     public AlarmsRoutine(Dosage dosage, Medicament medicament) {
         this.dosage = dosage;
         this.medicament = medicament;
+        generateAlarms();
+    }
 
-        // Generating alarms
+    private void generateAlarms() {
         for (int i = 0; i < dosage.getTotalTakes(); i++) {
             Alarm alarm = new Alarm();
             alarm.setMessage(medicament.getName());
@@ -22,45 +23,15 @@ public class AlarmsRoutine {
         }
     }
 
-    public void ringAlarm() {
-        alarms.get(0).ring();
+    public void triggerAlarm() {
+        alarms.pop().ring();
     }
 
-    public void ringAlarm(int index) {
-        alarms.get(index).ring();
-    }
-
-    public void ringAlarm(Alarm a) {
-        a.ring();
-    }
-
-    public void setAllAlarmsActive(boolean active) {
-        for (Alarm alarm : alarms) {
-            alarm.setActive(active);
-        }
-    }
-
-    public void setAllAlarmsMessage(String message) {
-        for (Alarm alarm : alarms) {
-            alarm.setMessage(message);
-        }
-    }
-
-    public void setAllAlarmsTime(LocalDateTime time) {
-        for (Alarm alarm : alarms) {
-            alarm.setTime(time);
-        }
-    }
-
-    public void removeAlarm(Alarm alarm) {
-        alarms.remove(alarm);
-    }
-
-    public List<Alarm> getAlarms() {
+    public Stack<Alarm> getAlarms() {
         return alarms;
     }
 
-    public void setAlarms(List<Alarm> alarms) {
+    public void setAlarms(Stack<Alarm> alarms) {
         this.alarms = alarms;
     }
 
