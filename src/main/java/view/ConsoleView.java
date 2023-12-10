@@ -1,14 +1,14 @@
-package com.jrm.dosewise.view;
+package view;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.jrm.dosewise.controller.UserMedicationController;
-import com.jrm.dosewise.model.Dosage;
-import com.jrm.dosewise.model.DosagePerHour;
-import com.jrm.dosewise.model.Medicament;
-import com.jrm.dosewise.model.MedicamentReminder;
-import com.jrm.dosewise.model.UserMedication;
+import controller.UserMedicationController;
+import model.Dosage;
+import model.DosagePerHour;
+import model.Medicament;
+import model.MedicamentReminder;
+import model.UserMedication;
 
 public class ConsoleView implements Observer {
     private UserMedication model;

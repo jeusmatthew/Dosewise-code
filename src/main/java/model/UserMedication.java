@@ -1,9 +1,9 @@
-package com.jrm.dosewise.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jrm.dosewise.view.Observer;
+import view.Observer;
 
 public class UserMedication implements Observable {
     private List<MedicamentReminder> medications = new ArrayList<>();

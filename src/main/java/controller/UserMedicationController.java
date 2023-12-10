@@ -1,10 +1,10 @@
-package com.jrm.dosewise.controller;
+package controller;
 
 import java.util.List;
 
-import com.jrm.dosewise.model.MedicamentReminder;
-import com.jrm.dosewise.model.UserMedication;
-import com.jrm.dosewise.view.ConsoleView;
+import model.MedicamentReminder;
+import model.UserMedication;
+import view.ConsoleView;
 
 public class UserMedicationController {
     private UserMedication model;

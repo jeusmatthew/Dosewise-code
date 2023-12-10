@@ -1,6 +1,6 @@
-package com.jrm.dosewise.model;
+package model;
 
-import com.jrm.dosewise.view.Observer;
+import view.Observer;
 
 public interface Observable {
     public void registerObserver(Observer observer);

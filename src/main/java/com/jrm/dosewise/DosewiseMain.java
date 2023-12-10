@@ -6,8 +6,8 @@ package com.jrm.dosewise;
 
 import java.util.Scanner;
 
-import com.jrm.dosewise.model.UserMedication;
-import com.jrm.dosewise.controller.UserMedicationController;
+import model.UserMedication;
+import controller.UserMedicationController;
 
 /**
  *

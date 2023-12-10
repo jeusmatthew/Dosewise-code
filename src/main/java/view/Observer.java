@@ -1,4 +1,4 @@
-package com.jrm.dosewise.view;
+package view;
 
 public interface Observer {
     public void update();

@@ -1,4 +1,4 @@
-package com.jrm.dosewise.model;
+package model;
 
 public class Medicament {
     private String name;
