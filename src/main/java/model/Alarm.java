@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
-public class MedicamentAlarm {
+public class Alarm {
     private boolean active = true;
     private String message;
     private LocalDateTime time;

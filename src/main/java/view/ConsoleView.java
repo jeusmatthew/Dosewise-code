@@ -3,18 +3,18 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.UserMedicationController;
+import controller.Controller;
 import model.Dosage;
 import model.DosagePerHour;
 import model.Medicament;
-import model.MedicamentReminder;
-import model.UserMedication;
+import model.AlarmsRoutine;
+import model.MedicamentList;
 
 public class ConsoleView {
-    private UserMedication model;
-    private UserMedicationController controller;
+    private MedicamentList model;
+    private Controller controller;
 
-    public ConsoleView(UserMedication model, UserMedicationController controller) {
+    public ConsoleView(MedicamentList model, Controller controller) {
         this.model = model;
         this.controller = controller;
     }
@@ -45,7 +45,7 @@ public class ConsoleView {
                     int hours = sc.nextInt();
                     int days = sc.nextInt();
                     Dosage dosagePerHour = new DosagePerHour(hours, days);
-                    MedicamentReminder medication = new MedicamentReminder(dosagePerHour, medicament);
+                    AlarmsRoutine medication = new AlarmsRoutine(dosagePerHour, medicament);
                     controller.addMedication(medication);
                     System.out.println("Medication " + name + " added");
                     break;
@@ -64,7 +64,7 @@ public class ConsoleView {
                     name = sc.next();
                     medicament = new Medicament(name, "description", "compound");
                     dosagePerHour = new DosagePerHour(1, 1);
-                    medication = new MedicamentReminder(dosagePerHour, medicament);
+                    medication = new AlarmsRoutine(dosagePerHour, medicament);
                     controller.updateMedication(medication);
                     System.out.println("Medication " + name + " updated");
                     break;

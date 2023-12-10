@@ -2,24 +2,24 @@ package controller;
 
 import java.util.List;
 
-import model.MedicamentReminder;
-import model.UserMedication;
+import model.AlarmsRoutine;
+import model.MedicamentList;
 import view.ConsoleView;
 
-public class UserMedicationController {
-    private UserMedication model;
+public class Controller {
+    private MedicamentList model;
     private ConsoleView view;
 
-    public UserMedicationController(UserMedication model) {
+    public Controller(MedicamentList model) {
         this.model = model;
         this.view = new ConsoleView(model, this);
     }
 
-    public void addMedication(MedicamentReminder medication) {
+    public void addMedication(AlarmsRoutine medication) {
         model.addMedication(medication);
     }
 
-    public void removeMedication(MedicamentReminder medication) {
+    public void removeMedication(AlarmsRoutine medication) {
         model.removeMedication(medication);
     }
 
@@ -27,15 +27,15 @@ public class UserMedicationController {
         model.removeMedication(index);
     }
 
-    public void updateMedication(MedicamentReminder medication) {
+    public void updateMedication(AlarmsRoutine medication) {
         model.updateMedication(medication);
     }
 
-    public List<MedicamentReminder> getMedicationList() {
+    public List<AlarmsRoutine> getMedicationList() {
         return model.getMedications();
     }
     
-    public void setMedicationList(List<MedicamentReminder> medications) {
+    public void setMedicationList(List<AlarmsRoutine> medications) {
         model.setMedications(medications);
     }
 

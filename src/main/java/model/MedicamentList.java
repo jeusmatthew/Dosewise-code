@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserMedication {
-    private List<MedicamentReminder> medications = new ArrayList<>();
+public class MedicamentList {
+    private List<AlarmsRoutine> medications = new ArrayList<>();
 
     // CRUD operations
-    public void addMedication(MedicamentReminder medication) {
+    public void addMedication(AlarmsRoutine medication) {
         medications.add(medication);
     }
 
-    public void removeMedication(MedicamentReminder medication) {
+    public void removeMedication(AlarmsRoutine medication) {
         medications.remove(medication);
     }
 
@@ -20,8 +20,8 @@ public class UserMedication {
         medications.remove(index);
     }  
 
-    public void updateMedication(MedicamentReminder medication) {
-        MedicamentReminder oldMedication = medications.stream()
+    public void updateMedication(AlarmsRoutine medication) {
+        AlarmsRoutine oldMedication = medications.stream()
                 .filter(m -> m.getMedicament().getName().equals(medication.getMedicament().getName())).findFirst()
                 .orElse(null);
         if (oldMedication != null) {
@@ -30,11 +30,11 @@ public class UserMedication {
         }
     }
 
-    public List<MedicamentReminder> getMedications() {
+    public List<AlarmsRoutine> getMedications() {
         return medications;
     }
 
-    public void setMedications(List<MedicamentReminder> medications) {
+    public void setMedications(List<AlarmsRoutine> medications) {
         this.medications = medications;
     }
 
