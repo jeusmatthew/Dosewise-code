@@ -10,17 +10,15 @@ import model.Medicament;
 import model.MedicamentReminder;
 import model.UserMedication;
 
-public class ConsoleView implements Observer {
+public class ConsoleView {
     private UserMedication model;
     private UserMedicationController controller;
 
     public ConsoleView(UserMedication model, UserMedicationController controller) {
         this.model = model;
         this.controller = controller;
-        model.registerObserver(this);
     }
 
-    @Override
     public void update() {
         System.out.println("Medication list updated");
         controller.getMedicationList().forEach(m -> System.out.println(m));

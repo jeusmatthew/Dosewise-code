@@ -3,11 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import view.Observer;
 
-public class UserMedication implements Observable {
+public class UserMedication {
     private List<MedicamentReminder> medications = new ArrayList<>();
-    private List<Observer> observers = new ArrayList<>();
 
     // CRUD operations
     public void addMedication(MedicamentReminder medication) {
@@ -38,23 +36,6 @@ public class UserMedication implements Observable {
 
     public void setMedications(List<MedicamentReminder> medications) {
         this.medications = medications;
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
     }
 
 }
