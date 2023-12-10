@@ -62,10 +62,13 @@ public class ConsoleView {
                 case 3:
                     System.out.println("Medication name: ");
                     name = sc.next();
+                    System.out.println("index");
+                    int i = sc.nextInt();
                     medicament = new Medicament(name, "description", "compound");
                     dosagePerHour = new DosagePerHour(1, 1);
                     medication = new AlarmsRoutine(dosagePerHour, medicament);
-                    controller.updateMedication(medication);
+
+                    controller.updateMedication(i, medication); 
                     System.out.println("Medication " + name + " updated");
                     break;
 

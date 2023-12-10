@@ -26,6 +26,14 @@ public class AlarmsRoutine {
         alarms.get(0).ring();
     }
 
+    public void ringAlarm(int index) {
+        alarms.get(index).ring();
+    }
+
+    public void ringAlarm(Alarm a) {
+        a.ring();
+    }
+
     public void setAllAlarmsActive(boolean active) {
         for (Alarm alarm : alarms) {
             alarm.setActive(active);

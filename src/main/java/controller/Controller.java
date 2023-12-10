@@ -9,6 +9,7 @@ import view.ConsoleView;
 public class Controller {
     private MedicamentList model;
     private ConsoleView view;
+    
 
     public Controller(MedicamentList model) {
         this.model = model;
@@ -27,8 +28,8 @@ public class Controller {
         model.removeMedication(index);
     }
 
-    public void updateMedication(AlarmsRoutine medication) {
-        model.updateMedication(medication);
+    public void updateMedication(int index, AlarmsRoutine medication) {
+        model.updateMedication(index, medication);
     }
 
     public List<AlarmsRoutine> getMedicationList() {

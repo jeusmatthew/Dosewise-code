@@ -20,14 +20,8 @@ public class MedicamentList {
         medications.remove(index);
     }  
 
-    public void updateMedication(AlarmsRoutine medication) {
-        AlarmsRoutine oldMedication = medications.stream()
-                .filter(m -> m.getMedicament().getName().equals(medication.getMedicament().getName())).findFirst()
-                .orElse(null);
-        if (oldMedication != null) {
-            oldMedication.setDosage(medication.getDosage());
-            oldMedication.setMedicament(medication.getMedicament());
-        }
+    public void updateMedication(int index, AlarmsRoutine medication) {
+        medications.set(index, medication);
     }
 
     public List<AlarmsRoutine> getMedications() {
