@@ -4,16 +4,22 @@ import java.util.List;
 
 import model.AlarmsRoutine;
 import model.MedicamentList;
-import view.ConsoleView;
+import view.*;
 
 public class Controller {
     private MedicamentList model;
-    private ConsoleView view;
+    private Panel1 view;
+    private DatePane pnlDate;
+    private anadirPane1 pnlAdd;
     
 
     public Controller(MedicamentList model) {
         this.model = model;
-        this.view = new ConsoleView(model, this);
+        this.view = new Panel1();
+        
+        // paneles de la vista que se cambian segun el programa
+        this.pnlAdd = new anadirPane1();
+        this.pnlDate = new DatePane();
     }
 
     public void addMedication(AlarmsRoutine medication) {
@@ -41,8 +47,7 @@ public class Controller {
     }
 
     public void start() {
-        view.printMenu();
-        view.getUserInput();
+        view.setVisible(true);
     }
 
 }
