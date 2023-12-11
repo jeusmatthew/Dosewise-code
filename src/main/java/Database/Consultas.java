@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import model.Medicament;
 
 public class Consultas {
-    private final Conexion CONEXION = new Conexion();
+    private final Conexion conexion = new Conexion();
 
     public Consultas() {
         // creacion de la tabla si no existe por cuestiones de testing
         try {
-            Connection con = CONEXION.getConexion();
+            Connection con = conexion.getConexion();
             PreparedStatement ps = con.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS medicamentos (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255), compuesto VARCHAR(255))");
+                    "CREATE TABLE IF NOT EXISTS medicamentos (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255), descripcion VARCHAR(255), compuesto VARCHAR(255))");
             System.out.println("Inicializando");
             System.out.println("Creando la tabla si no existe");
             ps.executeUpdate();
@@ -27,11 +27,11 @@ public class Consultas {
     }
 
     public boolean reiniciarId() {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
                         .prepareStatement("ALTER TABLE medicamentos ALTER COLUMN id RESTART WITH 1")) {
 
-            return preparedStatement.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e);
             return false;
@@ -39,10 +39,10 @@ public class Consultas {
     }
 
     public boolean borrarTodosLosMedicamentos() {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM medicamentos")) {
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con.prepareStatement("DELETE FROM medicamentos")) {
 
-            return preparedStatement.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e);
             return false;
@@ -50,27 +50,30 @@ public class Consultas {
     }
 
     public boolean insertarMedicamento(Medicament medicamento) {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
-                        .prepareStatement("INSERT INTO medicamentos (nombre) VALUES (?)")) {
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
+                        .prepareStatement(
+                                "INSERT INTO medicamentos (nombre, descripcion, compuesto) VALUES (?, ?, ?)");) {
 
-            preparedStatement.setString(1, medicamento.getName()); // Corregido a getName()
+            ps.setString(1, medicamento.getName()); // Corregido a getName()
+            ps.setString(2, medicamento.getDescription());
+            ps.setString(3, medicamento.getCompound());
 
-            return preparedStatement.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
     public boolean eliminarMedicamento(Medicament medicamento) {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
                         .prepareStatement("DELETE FROM medicamentos WHERE id = ?")) {
 
-            preparedStatement.setInt(1, medicamento.getId());
+            ps.setInt(1, medicamento.getId());
 
-            return preparedStatement.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e);
             return false;
@@ -78,14 +81,14 @@ public class Consultas {
     }
 
     public boolean actualizarMedicamento(Medicament medicamento) {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
                         .prepareStatement("UPDATE medicamentos SET nombre = ? WHERE id = ?")) {
 
-            preparedStatement.setString(1, medicamento.getName());
-            preparedStatement.setInt(2, medicamento.getId());
+            ps.setString(1, medicamento.getName());
+            ps.setInt(2, medicamento.getId());
 
-            return preparedStatement.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e);
             return false;
@@ -93,13 +96,13 @@ public class Consultas {
     }
 
     public Medicament buscarMedicamentoPorNombre(Medicament medicamento) {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
                         .prepareStatement("SELECT * FROM medicamentos WHERE nombre = ?")) {
 
-            preparedStatement.setString(1, medicamento.getName());
+            ps.setString(1, medicamento.getName());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 medicamento.setId(resultSet.getInt("id"));
@@ -114,13 +117,13 @@ public class Consultas {
     }
 
     public Medicament buscarMedicamento(Medicament medicamento) {
-        try (Connection con = CONEXION.getConexion();
-                PreparedStatement preparedStatement = con
+        try (Connection con = conexion.getConexion();
+                PreparedStatement ps = con
                         .prepareStatement("SELECT * FROM medicamentos WHERE id = ?")) {
 
-            preparedStatement.setInt(1, medicamento.getId());
+            ps.setInt(1, medicamento.getId());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 medicamento.setName(resultSet.getString("nombre"));
@@ -135,32 +138,33 @@ public class Consultas {
     }
 
     public List<Medicament> tablaMedicamentos() {
-        List<Medicament> listita = new ArrayList<>();
-        System.out.println("Tabla medicamentos:");
+        List<Medicament> lista = new ArrayList<>();
 
-        try (Connection con = CONEXION.getConexion();
+        // System.out.println("Tabla medicamentos:");
+
+        try (Connection con = conexion.getConexion();
                 PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM medicamentos")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             {
 
-                System.out.println("Tabla de Medicamentos:");
-                System.out.println("ID\tNombre");
+                // System.out.println("Tabla de Medicamentos:");
+                // System.out.println("ID\tNombre");
 
                 while (resultSet.next()) {
-                    Medicament medicamentotemporale = new Medicament();
-                    medicamentotemporale.setId(resultSet.getInt("ID"));
-                    medicamentotemporale.setName(resultSet.getString("nombre"));
-                    listita.add(medicamentotemporale);
-                    System.out.println(medicamentotemporale.getId() + "\t" + medicamentotemporale.getName());
+                    Medicament temp = new Medicament();
+                    temp.setId(resultSet.getInt("ID"));
+                    temp.setName(resultSet.getString("nombre"));
+                    lista.add(temp);
+                    // System.out.println(temp.getId() + "\t" + temp.getName());
                 }
 
-                preparedStatement.executeQuery();
+                // preparedStatement.executeQuery();
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listita;
+        return lista;
     }
 
 }
