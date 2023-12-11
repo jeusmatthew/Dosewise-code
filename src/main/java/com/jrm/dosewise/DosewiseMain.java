@@ -4,20 +4,23 @@
 
 package com.jrm.dosewise;
 
-import java.util.Scanner;
-
 import model.MedicamentList;
 import controller.Controller;
+import database.Consultas;
 
 /**
  *
- * @author jeusm
+ * @author 
+ * Jimena Guadalupe Garcia Rios
+ * Raul Alejandro Magaña Flores
+ * Jesus Mateo Ortiz Chay
  */
 public class DosewiseMain {
 
     public static void main(String[] args) {
-        MedicamentList model = new MedicamentList();
-        Controller controller = new Controller(model);
+        var model = new MedicamentList();
+        var consultas = new Consultas();
+        var controller = new Controller(model, consultas);
 
         controller.start();
     }

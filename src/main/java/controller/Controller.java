@@ -2,24 +2,22 @@ package controller;
 
 import java.util.List;
 
+import database.Consultas;
+import model.Alarm;
 import model.AlarmsRoutine;
 import model.MedicamentList;
 import view.*;
 
 public class Controller {
     private MedicamentList model;
-    private Panel1 view;
-    private DatePane pnlDate;
-    private anadirPane1 pnlAdd;
-    
+    private Consultas consultas;
+    private final MainView view = new MainView();
+    private final WeekView pnlDate = new WeekView();
+    private final AddMedicamentView pnlAdd = new AddMedicamentView();
 
-    public Controller(MedicamentList model) {
+    public Controller(MedicamentList model, Consultas consultas) {
         this.model = model;
-        this.view = new Panel1();
-        
-        // paneles de la vista que se cambian segun el programa
-        this.pnlAdd = new anadirPane1();
-        this.pnlDate = new DatePane();
+        this.consultas = consultas;
     }
 
     public void addMedication(AlarmsRoutine medication) {
@@ -39,11 +37,11 @@ public class Controller {
     }
 
     public List<AlarmsRoutine> getMedicationList() {
-        return model.getMedications();
+        return model.getAllMedications();
     }
-    
+
     public void setMedicationList(List<AlarmsRoutine> medications) {
-        model.setMedications(medications);
+        model.setAllMedications(medications);
     }
 
     public void start() {
