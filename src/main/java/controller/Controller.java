@@ -11,9 +11,7 @@ import view.*;
 public class Controller {
     private MedicamentList model;
     private Consultas consultas;
-    private final MainView view = new MainView();
-    private final WeekView pnlDate = new WeekView();
-    private final AddMedicamentView pnlAdd = new AddMedicamentView();
+    private final MainView mainView = new MainView(this);
 
     public Controller(MedicamentList model, Consultas consultas) {
         this.model = model;
@@ -45,7 +43,6 @@ public class Controller {
     }
 
     public void start() {
-        view.setVisible(true);
+        mainView.setVisible(true);
     }
-
 }

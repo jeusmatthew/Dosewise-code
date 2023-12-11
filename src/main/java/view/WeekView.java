@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.Color;
+import javax.swing.JFrame;
 
 
 /**
@@ -16,11 +17,9 @@ public class WeekView extends javax.swing.JPanel {
     private int month;
     private int year;
     
-
-    
     public WeekView() {
-       initComponents();
-      initStyles();
+        initComponents();
+        initStyles();
       
     }
     

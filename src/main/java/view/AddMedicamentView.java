@@ -7,36 +7,28 @@ package view;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author IGNITER
  */
 public class AddMedicamentView extends javax.swing.JPanel {
-
+    private MainView parent;
     /**
      * Creates new form anadirPane1
      */
-    public AddMedicamentView() {
+    public AddMedicamentView(MainView parent) {
+        this.parent = parent;
         initComponents();
-       
+        initStyles();
     }
     
-    private void initContent() {
-        showJPanel(new WeekView());
+    private void initStyles() {
+        añadir.putClientProperty("JButton.buttonType", "roundRect");
+        cancelar.putClientProperty("JButton.buttonType", "roundRect");
     }
-
-    private void showJPanel(JPanel p) {
-        p.setSize(870, 590);
-        p.setLocation(0, 0);
-
-        JPanel3.removeAll();
-        JPanel3.add(p, BorderLayout.CENTER);
-        JPanel3.revalidate();
-        JPanel3.repaint();
-    }
+   
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,13 +97,16 @@ public class AddMedicamentView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
-        // TODO add your handling code here:
+        parent.changeToWeekView();
+        parent.setMenuButtonsVisible(true);
     }//GEN-LAST:event_añadirActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-      
+        parent.changeToWeekView();
+        parent.setMenuButtonsVisible(true);
     }//GEN-LAST:event_cancelarActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel3;

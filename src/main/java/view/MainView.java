@@ -6,6 +6,7 @@ package view;
 
 import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import controller.Controller;
 
 
 import java.awt.BorderLayout;
@@ -27,21 +28,24 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author IGNITER
  */
 public class MainView extends javax.swing.JFrame {
-
+    
+    private Controller controller;
+    private final WeekView weekView = new WeekView();
+    private final AddMedicamentView addView = new AddMedicamentView(this);
+    
     /**
      * Creates new form NewJFrame
      */
-    public MainView() {
+    public MainView(Controller controller) {
+        this.controller = controller;
         initComponents();
         initStyles();
         setDate();
-        initContent();
-
         FlatSVGIcon icon = new FlatSVGIcon("svg/IconoBusqueda.svg");
         setIconImage(icon.getImage());
-
+        setJPanel(weekView);
     }
-
+    
     private void initStyles() {
         
         dateText.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
@@ -62,15 +66,11 @@ public class MainView extends javax.swing.JFrame {
 
     private void setDate() {
         LocalDate now = LocalDate.now();
-        Locale spanishLocale = new Locale("es", "ES");
+        Locale spanishLocale = new Locale("es", "MX");
         dateText.setText(now.format(DateTimeFormatter.ofPattern("'Hoy es' EEEE dd 'de' MMMM 'de' yyyy", spanishLocale)));
     }
 
-    private void initContent() {
-        showJPanel(new WeekView());
-    }
-
-    private void showJPanel(JPanel p) {
+    public void setJPanel(JPanel p) {
         p.setSize(870, 590);
         p.setLocation(0, 0);
 
@@ -80,7 +80,13 @@ public class MainView extends javax.swing.JFrame {
         content.repaint();
     }
     
-  
+    public void changeToWeekView() {
+        setJPanel(weekView);
+    }
+
+    public void changeToAddView() {
+        setJPanel(addView);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,7 +201,7 @@ public class MainView extends javax.swing.JFrame {
 
         dateText.setBackground(new java.awt.Color(0, 0, 0));
         dateText.setText("Hoy es {dayname} {day} de {month} del {year} ");
-        jPanel1.add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 250, 40));
+        jPanel1.add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 250, 40));
 
         jLabelName.setText("DOSE WISE ");
         jPanel1.add(jLabelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
@@ -243,27 +249,32 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_textBuscarActionPerformed
 
     private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
-        anadir.setVisible(false);
-        eliminar.setVisible(false);
-        showJPanel(new AddMedicamentView());
+        setMenuButtonsVisible(false);
+        changeToAddView();
+        
     }//GEN-LAST:event_anadirActionPerformed
+
+    public void setMenuButtonsVisible(boolean b) {
+        anadir.setVisible(b);
+        eliminar.setVisible(b);
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+//     public static void main(String args[]) {
+//         /* Set the Nimbus look and feel */
 
 
- /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+//  /* Create and display the form */
+//         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
-                new MainView().setVisible(true);
-            }
-        });
-    }
+//             @Override
+//             public void run() {
+//                 new MainView().setVisible(true);
+//             }
+//         });
+//     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anadir;
