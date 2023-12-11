@@ -5,6 +5,9 @@
 package com.jrm.dosewise;
 
 import model.MedicamentList;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
 import controller.Controller;
 import database.Consultas;
 
@@ -18,6 +21,9 @@ import database.Consultas;
 public class DosewiseMain {
 
     public static void main(String[] args) {
+
+        FlatLightLaf.setup();
+
         var model = new MedicamentList();
         var consultas = new Consultas();
         var controller = new Controller(model, consultas);
