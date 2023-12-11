@@ -11,14 +11,14 @@ import java.awt.Color;
  *
  * @author IGNITER
  */
-public class DatePane extends javax.swing.JPanel {
+public class WeekView extends javax.swing.JPanel {
        
     private int month;
     private int year;
     
 
     
-    public DatePane() {
+    public WeekView() {
        initComponents();
       initStyles();
       

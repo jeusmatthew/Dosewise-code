@@ -11,18 +11,18 @@ import javax.swing.JPanel;
  *
  * @author IGNITER
  */
-public class anadirPane1 extends javax.swing.JPanel {
+public class AddMedicamentView extends javax.swing.JPanel {
 
     /**
      * Creates new form anadirPane1
      */
-    public anadirPane1() {
+    public AddMedicamentView() {
         initComponents();
        
     }
     
     private void initContent() {
-        showJPanel(new DatePane());
+        showJPanel(new WeekView());
     }
 
     private void showJPanel(JPanel p) {

@@ -26,12 +26,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author IGNITER
  */
-public class Panel1 extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Panel1() {
+    public MainView() {
         initComponents();
         initStyles();
         setDate();
@@ -67,7 +67,7 @@ public class Panel1 extends javax.swing.JFrame {
     }
 
     private void initContent() {
-        showJPanel(new DatePane());
+        showJPanel(new WeekView());
     }
 
     private void showJPanel(JPanel p) {
@@ -245,7 +245,7 @@ public class Panel1 extends javax.swing.JFrame {
     private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
         anadir.setVisible(false);
         eliminar.setVisible(false);
-        showJPanel(new anadirPane1());
+        showJPanel(new AddMedicamentView());
     }//GEN-LAST:event_anadirActionPerformed
 
     /**
@@ -260,7 +260,7 @@ public class Panel1 extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                new Panel1().setVisible(true);
+                new MainView().setVisible(true);
             }
         });
     }
