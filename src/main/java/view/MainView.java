@@ -32,6 +32,7 @@ public class MainView extends javax.swing.JFrame {
     private Controller controller;
     private final WeekView weekView = new WeekView();
     private final AddMedicamentView addView = new AddMedicamentView(this);
+    private final MedInfoView medView = new MedInfoView();
     
     /**
      * Creates new form NewJFrame
