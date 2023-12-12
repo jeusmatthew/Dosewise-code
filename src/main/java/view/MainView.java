@@ -94,8 +94,8 @@ public class MainView extends javax.swing.JFrame {
         setJPanel(medView);
     }
 
-    public void addUserMedicament() {
-        
+    public void addAlarmRoutine() {
+        // controller.add
     }
 
     /**

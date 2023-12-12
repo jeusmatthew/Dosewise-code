@@ -132,23 +132,27 @@ public class Consultas {
         }
     }
 
-    public Medicament buscarMedicamento(Medicament medicamento) {
+    public Medicament buscarMedicamento(int id) {
+        Medicament medicamento = new Medicament();
         try (Connection con = conexion.getConexion();
                 PreparedStatement ps = con
                         .prepareStatement("SELECT * FROM medicamentos WHERE id = ?")) {
 
-            ps.setInt(1, medicamento.getId());
+            ps.setInt(1, id);
 
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
+                medicamento.setId(resultSet.getInt("id"));
                 medicamento.setName(resultSet.getString("nombre"));
+                medicamento.setDescription(resultSet.getString("descripcion"));
+                medicamento.setCompound(resultSet.getString("compuesto"));
                 return medicamento;
             } else {
                 return null;
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return null;
         }
     }
