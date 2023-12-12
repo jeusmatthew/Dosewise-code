@@ -16,13 +16,29 @@ public class Consultas {
         // creacion de la tabla si no existe por cuestiones de testing
         try {
             Connection con = conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS medicamentos (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255), descripcion VARCHAR(255), compuesto VARCHAR(255))");
+            
+            // Inicializando la base de datos
+            String sql = "DROP TABLE IF EXISTS medicamentos;\r\n" + //
+                    "\r\n" + //
+                    "CREATE TABLE IF NOT EXISTS medicamentos (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255), descripcion VARCHAR(255), compuesto VARCHAR(255));\r\n" + //
+                    "\r\n" + //
+                    "INSERT INTO medicamentos (nombre, descripcion, compuesto) VALUES\r\n" + //
+                    "('Paracetamol', 'Medicamento para el dolor', 'Paracetamol'),\r\n" + //
+                    "('Ibuprofeno', 'Medicamento para el dolor y la inflamación', 'Ibuprofeno'),\r\n" + //
+                    "('Aspirina', 'Medicamento para el dolor, la inflamación y la fiebre', 'Ácido acetilsalicílico'),\r\n" + //
+                    "('Naproxeno', 'Medicamento para el dolor, la inflamación y la fiebre', 'Naproxeno'),\r\n" + //
+                    "('Diclofenaco', 'Medicamento para el dolor, la inflamación y la fiebre', 'Diclofenaco'),\r\n" + //
+                    "('Metamizol', 'Medicamento para el dolor y la fiebre', 'Metamizol'),\r\n" + //
+                    "('Codeína', 'Medicamento para el dolor', 'Codeína'),\r\n" + //
+                    "('Oxicodona', 'Medicamento para el dolor', 'Oxicodona'),\r\n" + //
+                    "('Tramadol', 'Medicamento para el dolor', 'Tramadol');\r\n" + //
+                    "\r\n" + //
+                    "";
+            PreparedStatement ps = con.prepareStatement(sql);
             System.out.println("Inicializando");
-            System.out.println("Creando la tabla si no existe");
             ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error al crear la tabla");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -137,7 +153,7 @@ public class Consultas {
         }
     }
 
-    public List<Medicament> tablaMedicamentos() {
+    public List<Medicament> getMedicaments() {
         List<Medicament> lista = new ArrayList<>();
 
         // System.out.println("Tabla medicamentos:");

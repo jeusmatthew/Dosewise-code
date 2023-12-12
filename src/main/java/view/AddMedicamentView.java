@@ -24,10 +24,18 @@ public class AddMedicamentView extends javax.swing.JPanel {
     }
     
     private void initStyles() {
-        añadir.putClientProperty("JButton.buttonType", "roundRect");
-        cancelar.putClientProperty("JButton.buttonType", "roundRect");
+        btnAdd.putClientProperty("JButton.buttonType", "roundRect");
+        btnCancelar.putClientProperty("JButton.buttonType", "roundRect");
     }
    
+    public void setMedicaments(String[] medicaments) {
+        cmbMeds.setModel(new javax.swing.DefaultComboBoxModel<>(medicaments));
+    }
+
+    public String getMedicament() {
+        return cmbMeds.getSelectedItem().toString();
+    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,84 +48,170 @@ public class AddMedicamentView extends javax.swing.JPanel {
 
         JPanel3 = new javax.swing.JPanel();
         labelAnadir = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbPer2 = new javax.swing.JComboBox<>();
         por = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbMeds = new javax.swing.JComboBox<>();
+        cmbPer1 = new javax.swing.JComboBox<>();
         dosis = new javax.swing.JLabel();
         cada = new javax.swing.JLabel();
-        cancelar = new javax.swing.JButton();
-        añadir = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        txtPeriodo2 = new javax.swing.JTextField();
+        txtPeriodo1 = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medicamento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        JPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelAnadir.setText("Añadir nuevo medicamento");
-        JPanel3.add(labelAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dias", "semanas", "meses", " " }));
-        JPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 93, -1));
+        cmbPer2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dias", "semanas", "meses", " " }));
 
         por.setText("por");
-        JPanel3.add(por, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 30, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        JPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 93, -1));
+        cmbMeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMeds.setToolTipText("");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        JPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 93, -1));
+        cmbPer1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "horas", "dias", "semanas" }));
+        cmbPer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPer1ActionPerformed(evt);
+            }
+        });
 
         dosis.setText("Dosis de Toma");
-        JPanel3.add(dosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
 
         cada.setText("Cada");
-        JPanel3.add(cada, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
 
-        cancelar.setText("Cancelar");
-        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        JPanel3.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 140, 30));
 
-        añadir.setText("Añadir Medicamento");
-        añadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        añadir.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Añadir Medicamento");
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                añadirActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        JPanel3.add(añadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 200, 40));
+
+        txtPeriodo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPeriodo2ActionPerformed(evt);
+            }
+        });
+
+        txtPeriodo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPeriodo1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPanel3Layout = new javax.swing.GroupLayout(JPanel3);
+        JPanel3.setLayout(JPanel3Layout);
+        JPanel3Layout.setHorizontalGroup(
+            JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanel3Layout.createSequentialGroup()
+                .addGap(0, 150, Short.MAX_VALUE)
+                .addComponent(cada)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPeriodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPer1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(por, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPeriodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPer2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
+            .addGroup(JPanel3Layout.createSequentialGroup()
+                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPanel3Layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(cmbMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelAnadir)))
+                    .addGroup(JPanel3Layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPanel3Layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPanel3Layout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(dosis)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        JPanel3Layout.setVerticalGroup(
+            JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(labelAnadir)
+                .addGap(30, 30, 30)
+                .addComponent(cmbMeds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dosis)
+                .addGap(26, 26, 26)
+                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbPer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(por)
+                    .addComponent(cmbPer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPeriodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPeriodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cada))
+                .addGap(32, 32, 32)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         add(JPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 680, 390));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         parent.changeToWeekView();
         parent.setMenuButtonsVisible(true);
-    }//GEN-LAST:event_añadirActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+    
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         parent.changeToWeekView();
         parent.setMenuButtonsVisible(true);
-    }//GEN-LAST:event_cancelarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbPer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPer1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPer1ActionPerformed
+
+    private void txtPeriodo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPeriodo2ActionPerformed
+
+    private void txtPeriodo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPeriodo1ActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel3;
-    public javax.swing.JButton añadir;
+    public javax.swing.JButton btnAdd;
+    public javax.swing.JButton btnCancelar;
     private javax.swing.JLabel cada;
-    public javax.swing.JButton cancelar;
+    public javax.swing.JComboBox<String> cmbMeds;
+    public javax.swing.JComboBox<String> cmbPer1;
+    public javax.swing.JComboBox<String> cmbPer2;
     private javax.swing.JLabel dosis;
-    public javax.swing.JComboBox<String> jComboBox1;
-    public javax.swing.JComboBox<String> jComboBox2;
-    public javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel labelAnadir;
     private javax.swing.JLabel por;
+    private javax.swing.JTextField txtPeriodo1;
+    private javax.swing.JTextField txtPeriodo2;
     // End of variables declaration//GEN-END:variables
 }

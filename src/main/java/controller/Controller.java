@@ -3,8 +3,8 @@ package controller;
 import java.util.List;
 
 import database.Consultas;
-import model.Alarm;
 import model.AlarmsRoutine;
+import model.Medicament;
 import model.MedicamentList;
 import view.*;
 
@@ -44,5 +44,9 @@ public class Controller {
 
     public void start() {
         mainView.setVisible(true);
+    }
+
+    public List<Medicament> getMedicamentsFromDB() {
+        return consultas.getMedicaments();
     }
 }

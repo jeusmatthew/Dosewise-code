@@ -4,7 +4,6 @@
  */
 package view;
 
-import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.Controller;
 
@@ -13,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +29,14 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class MainView extends javax.swing.JFrame {
     
-    private Controller controller;
+    private final Controller controller;
     private final WeekView weekView = new WeekView();
     private final AddMedicamentView addView = new AddMedicamentView(this);
-    private final MedInfoView medView = new MedInfoView();
+    private final MedInfoView medView = new MedInfoView(this);
     
     /**
      * Creates new form NewJFrame
+     * @param controller
      */
     public MainView(Controller controller) {
         this.controller = controller;
@@ -44,7 +45,7 @@ public class MainView extends javax.swing.JFrame {
         setDate();
         FlatSVGIcon icon = new FlatSVGIcon("svg/IconoBusqueda.svg");
         setIconImage(icon.getImage());
-        setJPanel(weekView);
+        changeToWeekView();
     }
     
     private void initStyles() {
@@ -56,9 +57,9 @@ public class MainView extends javax.swing.JFrame {
         jLabelName.setForeground(Color.black);
         textBuscar.putClientProperty("JComponent.roundRect", true);
 
-        buscar.putClientProperty("JButton.buttonType", "roundRect");
-        anadir.putClientProperty("JButton.buttonType", "roundRect");
-        eliminar.putClientProperty("JButton.buttonType", "roundRect");
+        btnSearch.putClientProperty("JButton.buttonType", "roundRect");
+        btnAdd.putClientProperty("JButton.buttonType", "roundRect");
+        btnDelete.putClientProperty("JButton.buttonType", "roundRect");
         
         listaPanel1.putClientProperty("FlatLaf.style", "font:bold $h3.regular.font");
         listaPanel1.setForeground(Color.black);
@@ -89,6 +90,14 @@ public class MainView extends javax.swing.JFrame {
         setJPanel(addView);
     }
 
+    public void changeToMedView() {
+        setJPanel(medView);
+    }
+
+    public void addUserMedicament() {
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,12 +109,12 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelBG = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        buscar = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         textBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPanel1 = new javax.swing.JList<>();
-        anadir = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         dateText = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
@@ -120,19 +129,19 @@ public class MainView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        buscar.setIcon(new FlatSVGIcon ("SVG/IconoBusqueda.svg"));
-        buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buscar.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new FlatSVGIcon ("SVG/IconoBusqueda.svg"));
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
-        eliminar.setText("Eliminar Medicamento");
-        eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Eliminar Medicamento");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -149,11 +158,11 @@ public class MainView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaPanel1);
 
-        anadir.setText("Añadir Medicamento");
-        anadir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        anadir.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Añadir Medicamento");
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anadirActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
@@ -161,24 +170,23 @@ public class MainView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(anadir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,13 +194,13 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(anadir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanelBG.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 580));
@@ -237,28 +245,36 @@ public class MainView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscarActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_eliminarActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textBuscarActionPerformed
 
-    private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         setMenuButtonsVisible(false);
+
+        String[] temp = new String[controller.getMedicamentsFromDB().size()];
+        for (int i = 0; i < controller.getMedicamentsFromDB().size(); i++) {
+            temp[i] = controller.getMedicamentsFromDB().get(i).getName();
+        }
+        addView.setMedicaments(temp);
         changeToAddView();
         
-    }//GEN-LAST:event_anadirActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     public void setMenuButtonsVisible(boolean b) {
-        anadir.setVisible(b);
-        eliminar.setVisible(b);
+        btnAdd.setVisible(b);
+        btnDelete.setVisible(b);
     }
+
+
 
     /**
      * @param args the command line arguments
@@ -278,11 +294,11 @@ public class MainView extends javax.swing.JFrame {
 //     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton anadir;
-    private javax.swing.JButton buscar;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JPanel content;
     private javax.swing.JLabel dateText;
-    private javax.swing.JButton eliminar;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
