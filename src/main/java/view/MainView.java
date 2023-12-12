@@ -171,6 +171,11 @@ public class MainView extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lstMeds.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstMedsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstMeds);
 
         btnAdd.setText("Añadir Medicamento");
@@ -290,29 +295,20 @@ public class MainView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void lstMedsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstMedsMouseClicked
+        if(evt.getClickCount() == 2) {
+            int index = lstMeds.getSelectedIndex();
+            if (index != -1) {
+                medView.setMedicament(controller.getMedicamentFromDB(lstMeds.getSelectedValue()));
+                changeToMedView();
+            }
+        }
+    }//GEN-LAST:event_lstMedsMouseClicked
+
     public void setMenuButtonsVisible(boolean b) {
         btnAdd.setVisible(b);
         btnDelete.setVisible(b);
     }
-
-
-
-    /**
-     * @param args the command line arguments
-     */
-//     public static void main(String args[]) {
-//         /* Set the Nimbus look and feel */
-
-
-//  /* Create and display the form */
-//         java.awt.EventQueue.invokeLater(new Runnable() {
-
-//             @Override
-//             public void run() {
-//                 new MainView().setVisible(true);
-//             }
-//         });
-//     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

@@ -54,4 +54,8 @@ public class Controller {
     public Medicament getMedicamentFromDB(int id) {
         return consultas.buscarMedicamento(id);
     }
+
+    public Medicament getMedicamentFromDB(String name) {
+        return consultas.buscarMedicamento(name);
+    }
 }
