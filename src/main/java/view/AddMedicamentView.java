@@ -7,6 +7,12 @@ package view;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
+import model.AlarmsRoutine;
+import model.Dosage;
+import model.DosagePerDay;
+import model.DosagePerHour;
+import model.Medicament;
+
 
 /**
  *
@@ -35,6 +41,13 @@ public class AddMedicamentView extends javax.swing.JPanel {
     public String getMedicament() {
         return cmbMeds.getSelectedItem().toString();
     }
+
+    private void clearFields() {
+        txtPeriodo1.setText("");
+        txtPeriodo2.setText("");
+        cmbMeds.setSelectedIndex(0);
+    }
+
 
     
     /**
@@ -177,6 +190,17 @@ public class AddMedicamentView extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         parent.changeToWeekView();
         parent.setMenuButtonsVisible(true);
+
+        Dosage dosage = null;
+
+        if(cmbPer1.getSelectedItem().toString().equals("horas")) {
+            dosage = new DosagePerHour(Integer.parseInt(txtPeriodo1.getText()), Integer.parseInt(txtPeriodo2.getText()));
+        } else {
+            dosage = new DosagePerDay(Integer.parseInt(txtPeriodo1.getText()) * Integer.parseInt(txtPeriodo2.getText()));
+        }
+
+        parent.addAlarmRoutine(new AlarmsRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1)));
+        clearFields();
     }//GEN-LAST:event_btnAddActionPerformed
 
     
@@ -184,6 +208,7 @@ public class AddMedicamentView extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         parent.changeToWeekView();
         parent.setMenuButtonsVisible(true);
+        clearFields();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbPer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPer1ActionPerformed

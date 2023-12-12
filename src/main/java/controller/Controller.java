@@ -9,8 +9,8 @@ import model.UserList;
 import view.*;
 
 public class Controller {
-    private UserList model;
-    private Consultas consultas;
+    private final UserList model;
+    private final Consultas consultas;
     private final MainView mainView = new MainView(this);
 
     public Controller(UserList model, Consultas consultas) {
@@ -44,6 +44,7 @@ public class Controller {
 
     public void start() {
         mainView.setVisible(true);
+        mainView.updateList();
     }
 
     public List<Medicament> getMedicamentsFromDB() {

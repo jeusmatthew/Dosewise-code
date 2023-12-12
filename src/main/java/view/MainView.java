@@ -6,7 +6,8 @@ package view;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.Controller;
-
+import model.AlarmsRoutine;
+import model.Medicament;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -61,8 +62,8 @@ public class MainView extends javax.swing.JFrame {
         btnAdd.putClientProperty("JButton.buttonType", "roundRect");
         btnDelete.putClientProperty("JButton.buttonType", "roundRect");
         
-        listaPanel1.putClientProperty("FlatLaf.style", "font:bold $h3.regular.font");
-        listaPanel1.setForeground(Color.black);
+        lstMeds.putClientProperty("FlatLaf.style", "font:bold $h3.regular.font");
+        lstMeds.setForeground(Color.black);
        
     }
 
@@ -94,8 +95,22 @@ public class MainView extends javax.swing.JFrame {
         setJPanel(medView);
     }
 
-    public void addAlarmRoutine() {
-        // controller.add
+    public Medicament getMedicamentFromDB(int id) {
+        return controller.getMedicamentFromDB(id);
+    }
+
+    public void addAlarmRoutine(AlarmsRoutine a) {
+        controller.addAlarmRoutine(a);
+        updateList();
+    }
+    
+    public void updateList() {
+        var temp = new ArrayList<String>();
+        for (AlarmsRoutine alarmsRoutine : controller.getAlarmsRoutine()) {
+            temp.add(alarmsRoutine.getMedicament().getName());
+        }
+        
+        lstMeds.setListData(temp.toArray(new String[0]));
     }
 
     /**
@@ -113,7 +128,7 @@ public class MainView extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         textBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaPanel1 = new javax.swing.JList<>();
+        lstMeds = new javax.swing.JList<>();
         btnAdd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         dateText = new javax.swing.JLabel();
@@ -151,12 +166,12 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        listaPanel1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstMeds.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(listaPanel1);
+        jScrollPane1.setViewportView(lstMeds);
 
         btnAdd.setText("Añadir Medicamento");
         btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -170,23 +185,25 @@ public class MainView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +229,7 @@ public class MainView extends javax.swing.JFrame {
         dateText.setText("Hoy es {dayname} {day} de {month} del {year} ");
         jPanel1.add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 250, 40));
 
-        jLabelName.setText("DOSE WISE ");
+        jLabelName.setText("DOSEWISE ");
         jPanel1.add(jLabelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jPanelBG.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 870, 110));
@@ -250,7 +267,11 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        int index = lstMeds.getSelectedIndex();
+        if (index != -1) {
+            controller.removeAlarmRoutine(index);
+            updateList();
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed
@@ -304,7 +325,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBG;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaPanel1;
+    private javax.swing.JList<String> lstMeds;
     private javax.swing.JTextField textBuscar;
     // End of variables declaration//GEN-END:variables
 
