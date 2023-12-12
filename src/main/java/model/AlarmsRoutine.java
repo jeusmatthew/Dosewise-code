@@ -15,11 +15,12 @@ public class AlarmsRoutine {
     }
 
     private void generateAlarms() {
-        for (int i = 0; i < dosage.getTotalTakes(); i++) {
+        for (int i = 1; i < dosage.getTotalTakes(); i++) {
             Alarm alarm = new Alarm();
             alarm.setMessage(medicament.getName());
             alarm.setTime(LocalDateTime.now().plusHours(dosage.getTakePeriod() * i));
             alarms.add(alarm);
+            System.out.println(i + "\t" + alarm.getTime().getDayOfWeek() + " " + alarm.getTime().getHour() + ":" + alarm.getTime().getMinute());
         }
     }
 

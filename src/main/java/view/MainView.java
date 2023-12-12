@@ -51,10 +51,10 @@ public class MainView extends javax.swing.JFrame {
     
     private void initStyles() {
         
-        dateText.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        dateText.putClientProperty("FlatLaf.style", "font: bold $h4.regular.font");
         dateText.setForeground(Color.GRAY);
 
-        jLabelName.putClientProperty("FlatLaf.style", "font:bold $h1.regular.font");
+        jLabelName.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
         jLabelName.setForeground(Color.black);
         textBuscar.putClientProperty("JComponent.roundRect", true);
 
@@ -62,7 +62,7 @@ public class MainView extends javax.swing.JFrame {
         btnAdd.putClientProperty("JButton.buttonType", "roundRect");
         btnDelete.putClientProperty("JButton.buttonType", "roundRect");
         
-        lstMeds.putClientProperty("FlatLaf.style", "font:bold $h3.regular.font");
+        lstMeds.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
         lstMeds.setForeground(Color.black);
        
     }
