@@ -47,8 +47,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtPeriodo2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmbPer2" min="-2" pref="93" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="lblPer2" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -89,10 +89,10 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cmbPer1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="por" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbPer2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPeriodo2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPeriodo1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPer2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnAdd" min="-2" pref="40" max="-2" attributes="0"/>
@@ -109,22 +109,9 @@
             <Property name="text" type="java.lang.String" value="A&#xf1;adir nuevo medicamento"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPer2">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="dias"/>
-                <StringItem index="1" value="semanas"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="por">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="por"/>
           </Properties>
         </Component>
@@ -193,6 +180,7 @@
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
@@ -210,6 +198,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPeriodo1ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPer2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="d&#xed;as"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

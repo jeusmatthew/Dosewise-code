@@ -9,12 +9,13 @@ import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import model.AlarmRoutine;
 import model.Dosage;
 import model.DosagePerDay;
 import model.DosagePerHour;
 import model.Medicament;
-
 
 /**
  *
@@ -22,6 +23,7 @@ import model.Medicament;
  */
 public class AddMedicamentView extends javax.swing.JPanel {
     private MainView parent;
+
     /**
      * Creates new form anadirPane1
      */
@@ -29,13 +31,15 @@ public class AddMedicamentView extends javax.swing.JPanel {
         this.parent = parent;
         initComponents();
         initStyles();
+        AutoCompleteDecorator.decorate(cmbMeds);
     }
-    
+
     private void initStyles() {
         btnAdd.putClientProperty("JButton.buttonType", "roundRect");
+        btnAdd.putClientProperty("Button.background", new java.awt.Color(0, 153, 153));
         btnCancelar.putClientProperty("JButton.buttonType", "roundRect");
     }
-   
+
     public void setMedicaments(String[] medicaments) {
         cmbMeds.setModel(new javax.swing.DefaultComboBoxModel<>(medicaments));
     }
@@ -50,8 +54,6 @@ public class AddMedicamentView extends javax.swing.JPanel {
         cmbMeds.setSelectedIndex(0);
     }
 
-
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,7 +65,6 @@ public class AddMedicamentView extends javax.swing.JPanel {
 
         JPanel3 = new javax.swing.JPanel();
         labelAnadir = new javax.swing.JLabel();
-        cmbPer2 = new javax.swing.JComboBox<>();
         por = new javax.swing.JLabel();
         cmbMeds = new javax.swing.JComboBox<>();
         cmbPer1 = new javax.swing.JComboBox<>();
@@ -73,6 +74,7 @@ public class AddMedicamentView extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         txtPeriodo2 = new javax.swing.JTextField();
         txtPeriodo1 = new javax.swing.JTextField();
+        lblPer2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -80,8 +82,7 @@ public class AddMedicamentView extends javax.swing.JPanel {
 
         labelAnadir.setText("Añadir nuevo medicamento");
 
-        cmbPer2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dias", "semanas" }));
-
+        por.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         por.setText("por");
 
         cmbMeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -113,6 +114,7 @@ public class AddMedicamentView extends javax.swing.JPanel {
 
         btnAdd.setText("Añadir Medicamento");
         btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.setOpaque(true);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -131,6 +133,9 @@ public class AddMedicamentView extends javax.swing.JPanel {
             }
         });
 
+        lblPer2.setText("días");
+        lblPer2.setToolTipText("");
+
         javax.swing.GroupLayout JPanel3Layout = new javax.swing.GroupLayout(JPanel3);
         JPanel3.setLayout(JPanel3Layout);
         JPanel3Layout.setHorizontalGroup(
@@ -147,8 +152,8 @@ public class AddMedicamentView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPeriodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbPer2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111))
+                .addComponent(lblPer2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
             .addGroup(JPanel3Layout.createSequentialGroup()
                 .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JPanel3Layout.createSequentialGroup()
@@ -180,10 +185,10 @@ public class AddMedicamentView extends javax.swing.JPanel {
                 .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbPer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(por)
-                    .addComponent(cmbPer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPeriodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPeriodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cada))
+                    .addComponent(cada)
+                    .addComponent(lblPer2))
                 .addGap(32, 32, 32)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,19 +199,22 @@ public class AddMedicamentView extends javax.swing.JPanel {
         add(JPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 680, 390));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPeriodo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPeriodo1ActionPerformed
+
+    private void txtPeriodo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPeriodo2ActionPerformed
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        
         Dosage dosage = null;
-        
-        if(cmbPer1.getSelectedItem().toString().equals("horas") && cmbPer2.getSelectedItem().toString().equals("dias")) {
+
+        if (cmbPer1.getSelectedItem().toString().equals("horas")) {
             dosage = new DosagePerHour(Integer.parseInt(txtPeriodo1.getText()),
-            Integer.parseInt(txtPeriodo2.getText()));
-        } else if (cmbPer1.getSelectedItem().toString().equals("dias")
-        && cmbPer2.getSelectedItem().toString().equals("semanas")) {
+                    Integer.parseInt(txtPeriodo2.getText()));
+        } else {
             dosage = new DosagePerDay(Integer.parseInt(txtPeriodo1.getText()), Integer.parseInt(txtPeriodo2.getText()));
-        } 
-        else {
-            JOptionPane.showMessageDialog(this, "Ingrese un periodo valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
         AlarmRoutine ar = new AlarmRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1));
         parent.addAlarmRoutine(ar);
@@ -215,8 +223,6 @@ public class AddMedicamentView extends javax.swing.JPanel {
         clearFields();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         parent.changeToWeekView();
         parent.setMenuButtonsVisible(true);
@@ -224,22 +230,17 @@ public class AddMedicamentView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbPer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPer1ActionPerformed
-        // TODO add your handling code here:
+        if (cmbPer1.getSelectedItem().toString().equals("horas")) {
+            lblPer2.setText("días");
+        }
+        if (cmbPer1.getSelectedItem().toString().equals("dias")) {
+            lblPer2.setText("semanas");
+        }
     }//GEN-LAST:event_cmbPer1ActionPerformed
-
-    private void txtPeriodo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPeriodo2ActionPerformed
-
-    private void txtPeriodo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPeriodo1ActionPerformed
 
     private void cmbPer1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPer1ItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPer1ItemStateChanged
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel3;
@@ -248,9 +249,9 @@ public class AddMedicamentView extends javax.swing.JPanel {
     private javax.swing.JLabel cada;
     public javax.swing.JComboBox<String> cmbMeds;
     public javax.swing.JComboBox<String> cmbPer1;
-    public javax.swing.JComboBox<String> cmbPer2;
     private javax.swing.JLabel dosis;
     private javax.swing.JLabel labelAnadir;
+    private javax.swing.JLabel lblPer2;
     private javax.swing.JLabel por;
     private javax.swing.JTextField txtPeriodo1;
     private javax.swing.JTextField txtPeriodo2;
