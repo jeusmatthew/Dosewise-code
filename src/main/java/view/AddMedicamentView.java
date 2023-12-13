@@ -205,12 +205,12 @@ public class AddMedicamentView extends javax.swing.JPanel {
         && cmbPer2.getSelectedItem().toString().equals("semanas")) {
             dosage = new DosagePerDay(Integer.parseInt(txtPeriodo1.getText()), Integer.parseInt(txtPeriodo2.getText()));
         } 
-        else{
+        else {
             JOptionPane.showMessageDialog(this, "Ingrese un periodo valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        parent.addAlarmRoutine(new AlarmRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1)));
+        AlarmRoutine ar = new AlarmRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1));
+        parent.addAlarmRoutine(ar);
         parent.changeToWeekView();
-        parent.updateWeekList();
         parent.setMenuButtonsVisible(true);
         clearFields();
     }//GEN-LAST:event_btnAddActionPerformed

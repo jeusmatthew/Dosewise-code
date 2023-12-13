@@ -6,7 +6,6 @@ package com.jrm.dosewise;
 
 import model.UserList;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import controller.Controller;

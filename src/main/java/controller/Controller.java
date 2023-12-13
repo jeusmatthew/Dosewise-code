@@ -45,7 +45,7 @@ public class Controller {
     public void start() {
         mainView.setVisible(true);
         mainView.updateList();
-        mainView.updateWeekList();
+        
     }
 
     public List<Medicament> getMedicamentsFromDB() {

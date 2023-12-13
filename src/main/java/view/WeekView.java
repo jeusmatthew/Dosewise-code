@@ -48,10 +48,7 @@ public class WeekView extends javax.swing.JPanel {
         }
     }
 
-    public void updateAlarmsSchedule() {
-
-        var alarmsRoutine = parent.getAlarmsRoutine();
-
+    public void updateAlarmsSchedule(AlarmRoutine a) {
         String[] dom = new String[0];
         String[] lun = new String[0];
         String[] mar = new String[0];
@@ -60,44 +57,39 @@ public class WeekView extends javax.swing.JPanel {
         String[] vie = new String[0];
         String[] sab = new String[0];
 
-        for (AlarmRoutine a : alarmsRoutine) {
-
-            dom = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        dom = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
+                .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            lun = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        lun = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            mar = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        mar = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            mier = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        mier = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            jue = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        jue = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            vie = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        vie = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-            sab = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
-                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
-                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+        sab = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
-
-        }
 
         listaDom.setListData(dom);
         listaLunes.setListData(lun);
@@ -106,6 +98,16 @@ public class WeekView extends javax.swing.JPanel {
         listaJueves.setListData(jue);
         listaViernes.setListData(vie);
         listaSabado.setListData(sab);
+    }
+
+    public void clearFields() {
+        listaDom.setListData(new String[0]);
+        listaLunes.setListData(new String[0]);
+        listaMartes.setListData(new String[0]);
+        listaMier.setListData(new String[0]);
+        listaJueves.setListData(new String[0]);
+        listaViernes.setListData(new String[0]);
+        listaSabado.setListData(new String[0]);
     }
 
     private void initStyles() {
@@ -131,25 +133,25 @@ public class WeekView extends javax.swing.JPanel {
         sabado.putClientProperty("FlatLaf.style", "font:bold $h3.regular.font");
         sabado.setForeground(Color.black);
 
-        listaLunes.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaLunes.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaLunes.setForeground(Color.black);
 
-        listaMartes.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaMartes.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaMartes.setForeground(Color.black);
 
-        listaMier.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaMier.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaMier.setForeground(Color.black);
 
-        listaJueves.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaJueves.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaJueves.setForeground(Color.black);
 
-        listaViernes.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaViernes.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaViernes.setForeground(Color.black);
 
-        listaSabado.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaSabado.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaSabado.setForeground(Color.black);
 
-        listaDom.putClientProperty("FlatLaf.style", "font:bold $h4.regular.font");
+        listaDom.putClientProperty("FlatLaf.style", "font:bold $h4.font");
         listaDom.setForeground(Color.black);
     }
 
@@ -161,7 +163,9 @@ public class WeekView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lunes = new javax.swing.JLabel();
@@ -236,11 +240,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane1.setToolTipText("");
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaSabado.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaSabado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaSabado.setFocusable(false);
         jScrollPane1.setViewportView(listaSabado);
@@ -251,12 +250,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane9.setToolTipText("");
         jScrollPane9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane9.setFocusable(false);
-
-        listaDom.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane9.setViewportView(listaDom);
 
         add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 100, 310));
@@ -265,11 +258,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane10.setToolTipText("");
         jScrollPane10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaLunes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaLunes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaLunes.setFocusable(false);
         jScrollPane10.setViewportView(listaLunes);
@@ -280,11 +268,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane11.setToolTipText("");
         jScrollPane11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaMartes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaMartes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaMartes.setFocusable(false);
         jScrollPane11.setViewportView(listaMartes);
@@ -295,11 +278,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane12.setToolTipText("");
         jScrollPane12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaMier.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaMier.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaMier.setFocusable(false);
         jScrollPane12.setViewportView(listaMier);
@@ -310,11 +288,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane13.setToolTipText("");
         jScrollPane13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaJueves.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaJueves.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaJueves.setFocusable(false);
         jScrollPane13.setViewportView(listaJueves);
@@ -325,11 +298,6 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane14.setToolTipText("");
         jScrollPane14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        listaViernes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaViernes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaViernes.setFocusable(false);
         jScrollPane14.setViewportView(listaViernes);
