@@ -63,32 +63,39 @@ public class WeekView extends javax.swing.JPanel {
         for (AlarmRoutine a : alarmsRoutine) {
 
             dom = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             lun = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             mar = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             mier = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             jue = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             vie = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
             sab = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
-                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
-                    .toArray(String[]::new);
+                .map(alarm -> "<html>" + alarm.getMessage() + "<br>" + alarm.getTime().getHour() + ":"
+                    + String.format("%02d", alarm.getTime().getMinute()) + "</html>")
+                .toArray(String[]::new);
 
         }
 
@@ -153,7 +160,8 @@ public class WeekView extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lunes = new javax.swing.JLabel();
@@ -185,36 +193,43 @@ public class WeekView extends javax.swing.JPanel {
         lunes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lunes.setText("Lunes");
         lunes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lunes.setOpaque(true);
         add(lunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 100, 70));
 
         domingo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         domingo.setText("Domingo");
         domingo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        domingo.setOpaque(true);
         add(domingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 70));
 
         miercoles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         miercoles.setText("Miércoles");
         miercoles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        miercoles.setOpaque(true);
         add(miercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 100, 70));
 
         martes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         martes.setText("Martes");
         martes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        martes.setOpaque(true);
         add(martes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 100, 70));
 
         jueves.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jueves.setText("Jueves");
         jueves.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jueves.setOpaque(true);
         add(jueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 100, 70));
 
         sabado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sabado.setText("Sabado");
         sabado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        sabado.setOpaque(true);
         add(sabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 100, 70));
 
         viernes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         viernes.setText("Viernes");
         viernes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        viernes.setOpaque(true);
         add(viernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 100, 70));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -223,15 +238,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaSabado.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaSabado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaSabado.setFocusable(false);
         jScrollPane1.setViewportView(listaSabado);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 100, 310));
@@ -239,17 +250,12 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane9.setToolTipText("");
         jScrollPane9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane9.setFocusable(false);
 
         listaDom.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane9.setViewportView(listaDom);
 
@@ -261,15 +267,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaLunes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaLunes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaLunes.setFocusable(false);
         jScrollPane10.setViewportView(listaLunes);
 
         add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 100, 310));
@@ -280,15 +282,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaMartes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaMartes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaMartes.setFocusable(false);
         jScrollPane11.setViewportView(listaMartes);
 
         add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 100, 310));
@@ -299,15 +297,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaMier.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaMier.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaMier.setFocusable(false);
         jScrollPane12.setViewportView(listaMier);
 
         add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 100, 310));
@@ -318,15 +312,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaJueves.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaJueves.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaJueves.setFocusable(false);
         jScrollPane13.setViewportView(listaJueves);
 
         add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 100, 310));
@@ -337,15 +327,11 @@ public class WeekView extends javax.swing.JPanel {
 
         listaViernes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
+        listaViernes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaViernes.setFocusable(false);
         jScrollPane14.setViewportView(listaViernes);
 
         add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 100, 310));

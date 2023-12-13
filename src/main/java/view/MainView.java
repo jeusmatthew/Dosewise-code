@@ -148,7 +148,7 @@ public class MainView extends javax.swing.JFrame {
         setResizable(false);
 
         jPanelBG.setToolTipText("");
-        jPanelBG.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jPanelBG.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanelBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
@@ -286,6 +286,7 @@ public class MainView extends javax.swing.JFrame {
             controller.removeAlarmRoutine(index);
             updateList();
         }
+        weekView.updateAlarmsSchedule();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed

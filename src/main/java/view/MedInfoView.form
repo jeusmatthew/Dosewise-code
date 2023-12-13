@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[700, 380]"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -19,21 +24,26 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="174" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel3" min="-2" pref="464" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+              <Component id="jPanel3" min="-2" pref="380" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[700, 380]"/>
+        </Property>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="false"/>
@@ -45,7 +55,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="80" width="-1" height="-1"/>
+              <AbsoluteConstraints x="30" y="50" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -55,7 +65,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="150" width="-1" height="-1"/>
+              <AbsoluteConstraints x="210" y="50" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -71,7 +81,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="620" y="10" width="40" height="40"/>
+              <AbsoluteConstraints x="610" y="0" width="40" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -81,7 +91,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="170" width="161" height="-1"/>
+              <AbsoluteConstraints x="210" y="70" width="161" height="-1"/>
             </Constraint>
           </Constraints>
 
@@ -90,9 +100,6 @@
             <Component class="javax.swing.JTextPane" name="txtCompound">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="UI" type="javax.swing.plaf.TextUI" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -103,7 +110,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="210" width="160" height="20"/>
+              <AbsoluteConstraints x="30" y="110" width="160" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -113,7 +120,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="230" width="270" height="90"/>
+              <AbsoluteConstraints x="30" y="130" width="590" height="230"/>
             </Constraint>
           </Constraints>
 
@@ -126,9 +133,6 @@
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="tabSize" type="int" value="4"/>
-                <Property name="UI" type="javax.swing.plaf.TextUI" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -139,7 +143,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="100" width="161" height="-1"/>
+              <AbsoluteConstraints x="30" y="70" width="161" height="-1"/>
             </Constraint>
           </Constraints>
 
@@ -148,9 +152,6 @@
             <Component class="javax.swing.JTextPane" name="txtName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="UI" type="javax.swing.plaf.TextUI" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
               </Properties>
             </Component>
           </SubComponents>

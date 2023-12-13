@@ -42,13 +42,16 @@ public class MedInfoView extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtName = new javax.swing.JTextPane();
 
+        setMinimumSize(new java.awt.Dimension(700, 380));
+
+        jPanel3.setMinimumSize(new java.awt.Dimension(700, 380));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         informacion.setText("Información del Medicamento");
-        jPanel3.add(informacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel3.add(informacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         compuesto.setText("Compuesto");
-        jPanel3.add(compuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel3.add(compuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         btnExit.setText("X");
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -57,15 +60,15 @@ public class MedInfoView extends javax.swing.JPanel {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 40, 40));
+        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 40, 40));
 
         txtCompound.setEditable(false);
         jScrollPane2.setViewportView(txtCompound);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 161, -1));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 161, -1));
 
         Contraindicaciones.setText("Descripcion");
-        jPanel3.add(Contraindicaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 160, 20));
+        jPanel3.add(Contraindicaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 160, 20));
 
         txtDescrp.setEditable(false);
         txtDescrp.setColumns(20);
@@ -74,12 +77,12 @@ public class MedInfoView extends javax.swing.JPanel {
         txtDescrp.setTabSize(4);
         jScrollPane7.setViewportView(txtDescrp);
 
-        jPanel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 270, 90));
+        jPanel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 590, 230));
 
         txtName.setEditable(false);
         jScrollPane3.setViewportView(txtName);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 161, -1));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 161, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,13 +91,13 @@ public class MedInfoView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

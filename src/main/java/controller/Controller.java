@@ -49,14 +49,14 @@ public class Controller {
     }
 
     public List<Medicament> getMedicamentsFromDB() {
-        return consultas.getMedicaments();
+        return consultas.getAllMedicaments();
     }
 
     public Medicament getMedicamentFromDB(int id) {
-        return consultas.buscarMedicamento(id);
+        return consultas.searchMedicament(id);
     }
 
     public Medicament getMedicamentFromDB(String name) {
-        return consultas.buscarMedicamento(name);
+        return consultas.searchMedicament(name);
     }
 }

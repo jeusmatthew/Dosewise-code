@@ -1,5 +1,8 @@
 package database;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,6 +12,20 @@ import java.util.ArrayList;
 
 import model.Medicament;
 
+/* CREATE TABLE IF NOT EXISTS Medicaments (
+	ID	INTEGER PRIMARY KEY AUTO_INCREMENT,  
+	Medicament_Name_Comercial	TEXT,
+	Compound	TEXT,
+	Contraindications	TEXT,
+	Side_And_Adverse_Reactions	TEXT,
+	Restrictions_On_Use_During_Pregnancy_And_Lactation	TEXT,
+	Drug_And_Other_Interactions	TEXT,
+	Protection_Legends	TEXT,
+	General_Precautions	TEXT,
+	Precautions_Regarding_Carcinogenesis_Mutagenesis_Teratogenesis_And_Fertility_Effects	TEXT,
+	Manifestations_And_Management_Of_Overdose_And_Accidental_Ingestion	TEXT
+); */
+
 public class Consultas {
     private final Conexion conexion = new Conexion();
 
@@ -16,127 +33,26 @@ public class Consultas {
         // creacion de la tabla si no existe por cuestiones de testing
         try {
             Connection con = conexion.getConexion();
-            
+
             // Inicializando la base de datos
-            String sql = "DROP TABLE IF EXISTS medicamentos;\r\n" + //
-                    "\r\n" + //
-                    "CREATE TABLE IF NOT EXISTS medicamentos (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255), descripcion VARCHAR(255), compuesto VARCHAR(255));\r\n" + //
-                    "\r\n" + //
-                    "INSERT INTO medicamentos (nombre, descripcion, compuesto) VALUES\r\n" + //
-                    "('Paracetamol', 'Medicamento para el dolor', 'Paracetamol'),\r\n" + //
-                    "('Ibuprofeno', 'Medicamento para el dolor y la inflamación', 'Ibuprofeno'),\r\n" + //
-                    "('Aspirina', 'Medicamento para el dolor, la inflamación y la fiebre', 'Ácido acetilsalicílico'),\r\n" + //
-                    "('Naproxeno', 'Medicamento para el dolor, la inflamación y la fiebre', 'Naproxeno'),\r\n" + //
-                    "('Diclofenaco', 'Medicamento para el dolor, la inflamación y la fiebre', 'Diclofenaco'),\r\n" + //
-                    "('Metamizol', 'Medicamento para el dolor y la fiebre', 'Metamizol'),\r\n" + //
-                    "('Codeína', 'Medicamento para el dolor', 'Codeína'),\r\n" + //
-                    "('Oxicodona', 'Medicamento para el dolor', 'Oxicodona'),\r\n" + //
-                    "('Tramadol', 'Medicamento para el dolor', 'Tramadol');\r\n" + //
-                    "\r\n" + //
-                    "";
+            String sql = new String(Files.readAllBytes(Paths.get("src/main/java/database/Medicaments.sql")));
+
             PreparedStatement ps = con.prepareStatement(sql);
             System.out.println("Inicializando");
             ps.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage() + "\nEsto es demasiado iiiimprobable");
         }
     }
 
-    public boolean reiniciarId() {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement("ALTER TABLE medicamentos ALTER COLUMN id RESTART WITH 1")) {
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
-    public boolean borrarTodosLosMedicamentos() {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con.prepareStatement("DELETE FROM medicamentos")) {
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
-    public boolean insertarMedicamento(Medicament medicamento) {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement(
-                                "INSERT INTO medicamentos (nombre, descripcion, compuesto) VALUES (?, ?, ?)");) {
-
-            ps.setString(1, medicamento.getName()); // Corregido a getName()
-            ps.setString(2, medicamento.getDescription());
-            ps.setString(3, medicamento.getCompound());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    public boolean eliminarMedicamento(Medicament medicamento) {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement("DELETE FROM medicamentos WHERE id = ?")) {
-
-            ps.setInt(1, medicamento.getId());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
-    public boolean actualizarMedicamento(Medicament medicamento) {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement("UPDATE medicamentos SET nombre = ? WHERE id = ?")) {
-
-            ps.setString(1, medicamento.getName());
-            ps.setInt(2, medicamento.getId());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
-    public Medicament buscarMedicamentoPorNombre(Medicament medicamento) {
-        try (Connection con = conexion.getConexion();
-                PreparedStatement ps = con
-                        .prepareStatement("SELECT * FROM medicamentos WHERE nombre = ?")) {
-
-            ps.setString(1, medicamento.getName());
-
-            ResultSet resultSet = ps.executeQuery();
-
-            if (resultSet.next()) {
-                medicamento.setId(resultSet.getInt("id"));
-                return medicamento;
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    public Medicament buscarMedicamento(int id) {
+    public Medicament searchMedicament(int id) {
         Medicament medicamento = new Medicament();
         try (Connection con = conexion.getConexion();
                 PreparedStatement ps = con
-                        .prepareStatement("SELECT * FROM medicamentos WHERE id = ?")) {
+                        .prepareStatement("SELECT * FROM medicaments WHERE id = ?")) {
 
             ps.setInt(1, id);
 
@@ -144,9 +60,18 @@ public class Consultas {
 
             if (resultSet.next()) {
                 medicamento.setId(resultSet.getInt("id"));
-                medicamento.setName(resultSet.getString("nombre"));
-                medicamento.setDescription(resultSet.getString("descripcion"));
-                medicamento.setCompound(resultSet.getString("compuesto"));
+                medicamento.setName(resultSet.getString("Medicament_Name_Comercial"));
+                medicamento.setDescription(String.format("Containdications\n%s\n\nSide and Adverse Reactions\n%s\n\nRestrictions on use during pregnancy and lactation\n%s\n\nDrug and other interactions\n%s\n\nProtection legends\n%s\n\nGeneral precautions\n%s\n\nPrecautions regarding carcinogenesis, mutagenesis, teratogenesis and fertility effects\n%s\n\nManifestations and management of overdose and accidental ingestion\n%s",
+                        resultSet.getString("Contraindications"),
+                        resultSet.getString("Side_And_Adverse_Reactions"),
+                        resultSet.getString("Restrictions_On_Use_During_Pregnancy_And_Lactation"),
+                        resultSet.getString("Drug_And_Other_Interactions"),
+                        resultSet.getString("Protection_Legends"),
+                        resultSet.getString("General_Precautions"),
+                        resultSet.getString("Precautions_Regarding_Carcinogenesis_Mutagenesis_Teratogenesis_And_Fertility_Effects"),
+                        resultSet.getString("Manifestations_And_Management_Of_Overdose_And_Accidental_Ingestion")
+                ));
+                medicamento.setCompound(resultSet.getString("Compound"));
                 return medicamento;
             } else {
                 return null;
@@ -157,11 +82,11 @@ public class Consultas {
         }
     }
 
-    public Medicament buscarMedicamento(String name) {
+    public Medicament searchMedicament(String name) {
         Medicament medicamento = new Medicament();
         try (Connection con = conexion.getConexion();
                 PreparedStatement ps = con
-                        .prepareStatement("SELECT * FROM medicamentos WHERE nombre = ?")) {
+                        .prepareStatement("SELECT * FROM medicaments WHERE Medicament_Name_Comercial = ?")) {
 
             ps.setString(1, name);
 
@@ -169,9 +94,18 @@ public class Consultas {
 
             if (resultSet.next()) {
                 medicamento.setId(resultSet.getInt("id"));
-                medicamento.setName(resultSet.getString("nombre"));
-                medicamento.setDescription(resultSet.getString("descripcion"));
-                medicamento.setCompound(resultSet.getString("compuesto"));
+                medicamento.setName(resultSet.getString("Medicament_Name_Comercial"));
+                medicamento.setDescription(String.format("Containdications\n%s\n\nSide and Adverse Reactions\n%s\n\nRestrictions on use during pregnancy and lactation\n%s\n\nDrug and other interactions\n%s\n\nProtection legends\n%s\n\nGeneral precautions\n%s\n\nPrecautions regarding carcinogenesis, mutagenesis, teratogenesis and fertility effects\n%s\n\nManifestations and management of overdose and accidental ingestion\n%s",
+                        resultSet.getString("Contraindications"),
+                        resultSet.getString("Side_And_Adverse_Reactions"),
+                        resultSet.getString("Restrictions_On_Use_During_Pregnancy_And_Lactation"),
+                        resultSet.getString("Drug_And_Other_Interactions"),
+                        resultSet.getString("Protection_Legends"),
+                        resultSet.getString("General_Precautions"),
+                        resultSet.getString("Precautions_Regarding_Carcinogenesis_Mutagenesis_Teratogenesis_And_Fertility_Effects"),
+                        resultSet.getString("Manifestations_And_Management_Of_Overdose_And_Accidental_Ingestion")
+                ));
+                medicamento.setCompound(resultSet.getString("Compound"));
                 return medicamento;
             } else {
                 return null;
@@ -182,32 +116,22 @@ public class Consultas {
         }
     }
 
-    public List<Medicament> getMedicaments() {
+    public List<Medicament> getAllMedicaments() {
         List<Medicament> lista = new ArrayList<>();
 
-        // System.out.println("Tabla medicamentos:");
-
         try (Connection con = conexion.getConexion();
-                PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM medicamentos")) {
+                PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM medicaments")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             {
-
-                // System.out.println("Tabla de Medicamentos:");
-                // System.out.println("ID\tNombre");
-
                 while (resultSet.next()) {
                     Medicament temp = new Medicament();
                     temp.setId(resultSet.getInt("ID"));
-                    temp.setName(resultSet.getString("nombre"));
+                    temp.setName(resultSet.getString("Medicament_Name_Comercial"));
                     lista.add(temp);
-                    // System.out.println(temp.getId() + "\t" + temp.getName());
                 }
-
-                // preparedStatement.executeQuery();
-
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return lista;
     }
