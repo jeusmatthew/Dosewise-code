@@ -112,11 +112,9 @@
         <Component class="javax.swing.JComboBox" name="cmbPer2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="2">
                 <StringItem index="0" value="dias"/>
                 <StringItem index="1" value="semanas"/>
-                <StringItem index="2" value="meses"/>
-                <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -150,14 +148,14 @@
         <Component class="javax.swing.JComboBox" name="cmbPer1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="horas"/>
                 <StringItem index="1" value="dias"/>
-                <StringItem index="2" value="semanas"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbPer1ItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPer1ActionPerformed"/>
           </Events>
           <AuxValues>

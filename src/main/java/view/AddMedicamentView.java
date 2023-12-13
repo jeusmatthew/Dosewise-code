@@ -5,9 +5,11 @@
 package view;
 
 import java.awt.BorderLayout;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.AlarmsRoutine;
+import model.AlarmRoutine;
 import model.Dosage;
 import model.DosagePerDay;
 import model.DosagePerHour;
@@ -78,14 +80,19 @@ public class AddMedicamentView extends javax.swing.JPanel {
 
         labelAnadir.setText("Añadir nuevo medicamento");
 
-        cmbPer2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dias", "semanas", "meses", " " }));
+        cmbPer2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dias", "semanas" }));
 
         por.setText("por");
 
         cmbMeds.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbMeds.setToolTipText("");
 
-        cmbPer1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "horas", "dias", "semanas" }));
+        cmbPer1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "horas", "dias" }));
+        cmbPer1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPer1ItemStateChanged(evt);
+            }
+        });
         cmbPer1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPer1ActionPerformed(evt);
@@ -188,18 +195,23 @@ public class AddMedicamentView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        parent.changeToWeekView();
-        parent.setMenuButtonsVisible(true);
-
+        
         Dosage dosage = null;
-
-        if(cmbPer1.getSelectedItem().toString().equals("horas")) {
-            dosage = new DosagePerHour(Integer.parseInt(txtPeriodo1.getText()), Integer.parseInt(txtPeriodo2.getText()));
-        } else {
-            dosage = new DosagePerDay(Integer.parseInt(txtPeriodo1.getText()) * Integer.parseInt(txtPeriodo2.getText()));
+        
+        if(cmbPer1.getSelectedItem().toString().equals("horas") && cmbPer2.getSelectedItem().toString().equals("dias")) {
+            dosage = new DosagePerHour(Integer.parseInt(txtPeriodo1.getText()),
+            Integer.parseInt(txtPeriodo2.getText()));
+        } else if (cmbPer1.getSelectedItem().toString().equals("dias")
+        && cmbPer2.getSelectedItem().toString().equals("semanas")) {
+            dosage = new DosagePerDay(Integer.parseInt(txtPeriodo1.getText()), Integer.parseInt(txtPeriodo2.getText()));
+        } 
+        else{
+            JOptionPane.showMessageDialog(this, "Ingrese un periodo valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        parent.addAlarmRoutine(new AlarmsRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1)));
+        parent.addAlarmRoutine(new AlarmRoutine(dosage, parent.getMedicamentFromDB(cmbMeds.getSelectedIndex() + 1)));
+        parent.changeToWeekView();
+        parent.updateWeekList();
+        parent.setMenuButtonsVisible(true);
         clearFields();
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -222,6 +234,10 @@ public class AddMedicamentView extends javax.swing.JPanel {
     private void txtPeriodo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPeriodo1ActionPerformed
+
+    private void cmbPer1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPer1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPer1ItemStateChanged
 
     
 

@@ -3,12 +3,12 @@ package model;
 import java.time.LocalDateTime;
 import java.util.Stack;
 
-public class AlarmsRoutine {
+public class AlarmRoutine {
     private Stack<Alarm> alarms = new Stack<>();
     private Dosage dosage;
     private Medicament medicament;
 
-    public AlarmsRoutine(Dosage dosage, Medicament medicament) {
+    public AlarmRoutine(Dosage dosage, Medicament medicament) {
         this.dosage = dosage;
         this.medicament = medicament;
         generateAlarms();

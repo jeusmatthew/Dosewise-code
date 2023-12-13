@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 
 import database.Consultas;
-import model.AlarmsRoutine;
+import model.AlarmRoutine;
 import model.Medicament;
 import model.UserList;
 import view.*;
@@ -18,11 +18,11 @@ public class Controller {
         this.consultas = consultas;
     }
 
-    public void addAlarmRoutine(AlarmsRoutine medication) {
+    public void addAlarmRoutine(AlarmRoutine medication) {
         model.addAlarmRoutine(medication);
     }
 
-    public void removeAlarmRoutine(AlarmsRoutine medication) {
+    public void removeAlarmRoutine(AlarmRoutine medication) {
         model.removeAlarmRoutine(medication);
     }
 
@@ -30,21 +30,22 @@ public class Controller {
         model.removeAlarmRoutine(index);
     }
 
-    public void updateAlarmRoutine(int index, AlarmsRoutine medication) {
+    public void updateAlarmRoutine(int index, AlarmRoutine medication) {
         model.updateAlarmRoutine(index, medication);
     }
 
-    public List<AlarmsRoutine> getAlarmsRoutine() {
+    public List<AlarmRoutine> getAlarmsRoutine() {
         return model.getAll();
     }
 
-    public void setMedicationList(List<AlarmsRoutine> medications) {
+    public void setMedicationList(List<AlarmRoutine> medications) {
         model.setAll(medications);
     }
 
     public void start() {
         mainView.setVisible(true);
         mainView.updateList();
+        mainView.updateWeekList();
     }
 
     public List<Medicament> getMedicamentsFromDB() {

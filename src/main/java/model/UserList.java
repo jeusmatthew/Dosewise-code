@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserList {
-    private List<AlarmsRoutine> alarmsRoutine = new ArrayList<>();
+    private List<AlarmRoutine> alarmsRoutine = new ArrayList<>();
 
     // CRUD operations
-    public void addAlarmRoutine(AlarmsRoutine medication) {
+    public void addAlarmRoutine(AlarmRoutine medication) {
         alarmsRoutine.add(medication);
     }
 
-    public void removeAlarmRoutine(AlarmsRoutine medication) {
+    public void removeAlarmRoutine(AlarmRoutine medication) {
         alarmsRoutine.remove(medication);
     }
 
@@ -23,23 +23,23 @@ public class UserList {
         alarmsRoutine.clear();
     }
 
-    public void updateAlarmRoutine(int index, AlarmsRoutine medication) {
+    public void updateAlarmRoutine(int index, AlarmRoutine medication) {
         alarmsRoutine.set(index, medication);
     }
 
-    public AlarmsRoutine getAlarmRoutine(int index) {
+    public AlarmRoutine getAlarmRoutine(int index) {
         return alarmsRoutine.get(index);
     }
 
-    public void setAlarmRoutine(int index, AlarmsRoutine medication) {
+    public void setAlarmRoutine(int index, AlarmRoutine medication) {
         alarmsRoutine.set(index, medication);
     }
 
-    public List<AlarmsRoutine> getAll() {
+    public List<AlarmRoutine> getAll() {
         return alarmsRoutine;
     }
 
-    public void setAll(List<AlarmsRoutine> medications) {
+    public void setAll(List<AlarmRoutine> medications) {
         this.alarmsRoutine = medications;
     }
 

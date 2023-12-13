@@ -2,10 +2,11 @@ package model;
 
 public class DosagePerDay implements Dosage{
     private int days;
-    private int takes;
+    private int weeks;
 
-    public DosagePerDay(int days) {
+    public DosagePerDay(int days, int weeks) {
         this.days = days;
+        this.weeks = weeks;
     }
 
     @Override
@@ -23,6 +24,6 @@ public class DosagePerDay implements Dosage{
 
     @Override
     public int getTotalTakes() {
-        return days * takes;
+        return weeks * (7 / days);
     }    
 }

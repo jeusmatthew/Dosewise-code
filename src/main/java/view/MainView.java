@@ -6,7 +6,7 @@ package view;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.Controller;
-import model.AlarmsRoutine;
+import model.AlarmRoutine;
 import model.Medicament;
 
 import java.awt.BorderLayout;
@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +32,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainView extends javax.swing.JFrame {
     
     private final Controller controller;
-    private final WeekView weekView = new WeekView();
+    private final WeekView weekView = new WeekView(this);
     private final AddMedicamentView addView = new AddMedicamentView(this);
     private final MedInfoView medView = new MedInfoView(this);
     
@@ -99,18 +100,26 @@ public class MainView extends javax.swing.JFrame {
         return controller.getMedicamentFromDB(id);
     }
 
-    public void addAlarmRoutine(AlarmsRoutine a) {
+    public void addAlarmRoutine(AlarmRoutine a) {
         controller.addAlarmRoutine(a);
         updateList();
     }
     
     public void updateList() {
         var temp = new ArrayList<String>();
-        for (AlarmsRoutine alarmsRoutine : controller.getAlarmsRoutine()) {
+        for (AlarmRoutine alarmsRoutine : controller.getAlarmsRoutine()) {
             temp.add(alarmsRoutine.getMedicament().getName());
         }
-        
+
         lstMeds.setListData(temp.toArray(new String[0]));
+    }
+
+    public List<AlarmRoutine> getAlarmsRoutine() {
+        return controller.getAlarmsRoutine();
+    }
+
+    public void updateWeekList() {
+        weekView.updateAlarmsSchedule();
     }
 
     /**

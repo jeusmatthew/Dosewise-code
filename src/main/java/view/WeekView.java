@@ -7,20 +7,91 @@ package view;
 import java.awt.Color;
 import javax.swing.JFrame;
 
+import model.AlarmRoutine;
+
 /**
  *
  * @author IGNITER
  */
 public class WeekView extends javax.swing.JPanel {
+    private final MainView parent;
 
-    public WeekView() {
+    public WeekView(MainView parent) {
+        this.parent = parent;
         initComponents();
         initStyles();
 
+        // Highlight today in the week view
+        var today = java.time.LocalDate.now().getDayOfWeek().getValue();
+        switch (today) {
+            case 1:
+                lunes.setBackground(Color.yellow);
+                break;
+            case 2:
+                martes.setBackground(Color.yellow);
+                break;
+            case 3:
+                miercoles.setBackground(Color.yellow);
+                break;
+            case 4:
+                jueves.setBackground(Color.yellow);
+                break;
+            case 5:
+                viernes.setBackground(Color.yellow);
+                break;
+            case 6:
+                sabado.setBackground(Color.yellow);
+                break;
+            case 7:
+                domingo.setBackground(Color.yellow);
+                break;
+        }
     }
 
-    public void setLists(String[] dom, String[] lun, String[] mar, String[] mier, String[] jue, String[] vie,
-            String[] sab) {
+    public void updateAlarmsSchedule() {
+
+        var alarmsRoutine = parent.getAlarmsRoutine();
+
+        String[] dom = new String[0];
+        String[] lun = new String[0];
+        String[] mar = new String[0];
+        String[] mier = new String[0];
+        String[] jue = new String[0];
+        String[] vie = new String[0];
+        String[] sab = new String[0];
+
+        for (AlarmRoutine a : alarmsRoutine) {
+
+            dom = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            lun = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            mar = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            mier = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            jue = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            vie = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+            sab = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
+                    .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+                    .toArray(String[]::new);
+
+        }
+
         listaDom.setListData(dom);
         listaLunes.setListData(lun);
         listaMartes.setListData(mar);
