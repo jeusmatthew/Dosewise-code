@@ -2,47 +2,65 @@ package controller;
 
 import java.util.List;
 
-import model.AlarmsRoutine;
-import model.MedicamentList;
-import view.ConsoleView;
+import database.Consultas;
+import model.AlarmRoutine;
+import model.Medicament;
+import model.UserList;
+import view.*;
 
 public class Controller {
-    private MedicamentList model;
-    private ConsoleView view;
-    
+    private final UserList model;
+    private final Consultas consultas;
+    private final MainView mainView = new MainView(this);
 
-    public Controller(MedicamentList model) {
+    public Controller(UserList model, Consultas consultas) {
         this.model = model;
-        this.view = new ConsoleView(model, this);
+        this.consultas = consultas;
     }
 
-    public void addMedication(AlarmsRoutine medication) {
-        model.addMedication(medication);
+    public void addAlarmRoutine(AlarmRoutine medication) {
+        model.addAlarmRoutine(medication);
     }
 
-    public void removeMedication(AlarmsRoutine medication) {
-        model.removeMedication(medication);
+    public void removeAlarmRoutine(AlarmRoutine medication) {
+        model.removeAlarmRoutine(medication);
     }
 
-    public void removeMedication(int index) {
-        model.removeMedication(index);
+    public void removeAlarmRoutine(int index) {
+        model.removeAlarmRoutine(index);
     }
 
-    public void updateMedication(int index, AlarmsRoutine medication) {
-        model.updateMedication(index, medication);
+    public void updateAlarmRoutine(int index, AlarmRoutine medication) {
+        model.updateAlarmRoutine(index, medication);
     }
 
-    public List<AlarmsRoutine> getMedicationList() {
-        return model.getMedications();
+    public List<AlarmRoutine> getAlarmsRoutine() {
+        return model.getAll();
     }
-    
-    public void setMedicationList(List<AlarmsRoutine> medications) {
-        model.setMedications(medications);
+
+    public void setMedicationList(List<AlarmRoutine> medications) {
+        model.setAll(medications);
     }
 
     public void start() {
-        view.printMenu();
-        view.getUserInput();
+        mainView.setVisible(true);
+        mainView.updateList();
+        
     }
 
+    public List<Medicament> getMedicamentsFromDB() {
+        return consultas.getAllMedicaments();
+    }
+
+    public Medicament getMedicamentFromDB(int id) {
+        return consultas.searchMedicament(id);
+    }
+
+    public Medicament getMedicamentFromDB(String name) {
+        return consultas.searchMedicament(name);
+    }
+
+    public void removeAllAlarmsRoutine(){
+        model.removeAll();
+    }
 }

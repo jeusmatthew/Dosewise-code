@@ -3,8 +3,9 @@ package model;
 public class DosagePerHour implements Dosage {
     private int days;
     private int hours;
+    private int DAY = 24;
 
-    public DosagePerHour(int days, int hours) {
+    public DosagePerHour(int hours, int days) {
         this.days = days;
         this.hours = hours;
     }
@@ -32,6 +33,6 @@ public class DosagePerHour implements Dosage {
 
     @Override
     public int getTotalTakes() {
-        return days * hours;
+        return days * (DAY / hours);
     }
 }

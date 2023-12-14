@@ -1,4 +1,4 @@
-package Database;
+package database;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ public class Conexion {
         try {
 
             Properties properties = new Properties();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/Database/app.properties");
+            FileInputStream fileInputStream = new FileInputStream("src/main/java/database/app.properties");
             properties.load(fileInputStream);
             con = (Connection) DriverManager.getConnection(properties.getProperty("url"),
                     properties.getProperty("user"), properties.getProperty("password"));

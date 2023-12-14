@@ -4,20 +4,33 @@
 
 package com.jrm.dosewise;
 
-import java.util.Scanner;
+import model.UserList;
 
-import model.MedicamentList;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import controller.Controller;
+import database.Consultas;
 
 /**
  *
- * @author jeusm
+ * @author
+ *         Jimena Guadalupe Garcia Rios
+ * @author
+ *         Raul Alejandro Magaña Flores
+ * @author
+ *         Jesus Mateo Ortiz Chay
+ * 
+ * @version 1.0.0
  */
 public class DosewiseMain {
 
     public static void main(String[] args) {
-        MedicamentList model = new MedicamentList();
-        Controller controller = new Controller(model);
+
+        FlatMacLightLaf.setup();
+
+        var model = new UserList();
+        var consultas = new Consultas();
+        var controller = new Controller(model, consultas);
 
         controller.start();
     }
