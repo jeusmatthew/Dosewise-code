@@ -5,15 +5,9 @@
 package view;
 
 import java.awt.Color;
-import java.time.temporal.IsoFields;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
-
-import javax.print.attribute.standard.MediaSize.ISO;
-import javax.swing.JFrame;
-
 import model.Alarm;
 import model.AlarmRoutine;
 
@@ -22,6 +16,7 @@ import model.AlarmRoutine;
  * @author IGNITER
  */
 public class WeekView extends javax.swing.JPanel {
+
     private final MainView parent;
 
     public WeekView(MainView parent) {
@@ -76,44 +71,44 @@ public class WeekView extends javax.swing.JPanel {
 
         dom = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
-                .map(alarm -> alarm.getTime().getHour() + ":" 
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                .map(alarm -> alarm.getTime().getHour() + ":"
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         lun = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         mar = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         mier = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         jue = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         vie = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         sab = temp.stream()
                 .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
                 .map(alarm -> alarm.getTime().getHour() + ":"
-                        + String.format("%02d", alarm.getTime().getMinute()))
+                + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
         listaDom.setListData(dom);

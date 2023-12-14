@@ -12,20 +12,6 @@ import java.util.ArrayList;
 
 import model.Medicament;
 
-/* CREATE TABLE IF NOT EXISTS Medicaments (
-	ID	INTEGER PRIMARY KEY AUTO_INCREMENT,  
-	Medicament_Name_Comercial	TEXT,
-	Compound	TEXT,
-	Contraindications	TEXT,
-	Side_And_Adverse_Reactions	TEXT,
-	Restrictions_On_Use_During_Pregnancy_And_Lactation	TEXT,
-	Drug_And_Other_Interactions	TEXT,
-	Protection_Legends	TEXT,
-	General_Precautions	TEXT,
-	Precautions_Regarding_Carcinogenesis_Mutagenesis_Teratogenesis_And_Fertility_Effects	TEXT,
-	Manifestations_And_Management_Of_Overdose_And_Accidental_Ingestion	TEXT
-); */
-
 public class Consultas {
     private final Conexion conexion = new Conexion();
 

@@ -20,7 +20,7 @@ import database.Consultas;
  * @author
  *         Jesus Mateo Ortiz Chay
  * 
- * @version 0.9.0a
+ * @version 1.0.0
  */
 public class DosewiseMain {
 

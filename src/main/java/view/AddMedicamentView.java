@@ -4,18 +4,11 @@
  */
 package view;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import model.AlarmRoutine;
 import model.Dosage;
 import model.DosagePerDay;
 import model.DosagePerHour;
-import model.Medicament;
 
 /**
  *
