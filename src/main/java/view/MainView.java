@@ -6,17 +6,30 @@ package view;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import controller.Controller;
+import model.Alarm;
 import model.AlarmRoutine;
 import model.Medicament;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -55,7 +68,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelName.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
         jLabelName.setForeground(Color.black);
         // textBuscar.putClientProperty("JComponent.roundRect", true);
-
+        btnDelAll.putClientProperty("JButton.buttonType", "roundRect");
         // btnSearch.putClientProperty("JButton.buttonType", "roundRect");
         btnAdd.putClientProperty("JButton.buttonType", "roundRect");
         btnDelete.putClientProperty("JButton.buttonType", "roundRect");
@@ -122,6 +135,20 @@ public class MainView extends javax.swing.JFrame {
         weekView.updateAlarmsSchedule(a);
     }
 
+    public void ringAlarm(AlarmRoutine ar){
+        Alarm a = ar.getAlarm();
+        try (Clip clip = (Clip) AudioSystem.getLine(new Line.Info(Clip.class))) {
+            clip.open(AudioSystem.getAudioInputStream(new File("src/main/resources/alarm.wav")));
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            JOptionPane.showMessageDialog(this, String.format("Debes tomar tu medicamento %s de las %02d:%02d", a.getMessage(), a.getTime().getHour(), a.getTime().getMinute()), "Alarma", JOptionPane.INFORMATION_MESSAGE, null);
+            clip.stop();
+            weekView.updateAlarmsSchedule(ar);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,6 +165,7 @@ public class MainView extends javax.swing.JFrame {
         lstMeds = new javax.swing.JList<>();
         btnAdd = new javax.swing.JButton();
         lblMed = new javax.swing.JLabel();
+        btnDelAll = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         dateText = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
@@ -178,6 +206,14 @@ public class MainView extends javax.swing.JFrame {
 
         lblMed.setText("Medicamentos");
 
+        btnDelAll.setText("Eliminar todo");
+        btnDelAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -191,7 +227,8 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelAll, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -205,11 +242,14 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(87, 87, 87)
                 .addComponent(lblMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelAll, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanelBG.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 580));
@@ -219,6 +259,11 @@ public class MainView extends javax.swing.JFrame {
 
         dateText.setBackground(new java.awt.Color(0, 0, 0));
         dateText.setText("Hoy es {dayname} {day} de {month} del {year} ");
+        dateText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateTextMouseClicked(evt);
+            }
+        });
         jPanel1.add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 250, 40));
 
         jLabelName.setText("DOSEWISE ");
@@ -257,17 +302,21 @@ public class MainView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int index = lstMeds.getSelectedIndex();
+
+        if(JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este medicamento?", "Eliminar medicamento", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
+            return;
+
         if (index != -1) {
             controller.removeAlarmRoutine(index);
             updateList();
         }
         weekView.clearFields();
         lblActualMed.setText(" ");
-    }// GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         setMenuButtonsVisible(false);
 
         String[] temp = new String[controller.getMedicamentsFromDB().size()];
@@ -277,9 +326,9 @@ public class MainView extends javax.swing.JFrame {
         addView.setMedicaments(temp);
         changeToAddView();
 
-    }// GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void lstMedsMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lstMedsMouseClicked
+    private void lstMedsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstMedsMouseClicked
         int index = lstMeds.getSelectedIndex();
 
         if (evt.getClickCount() == 2) {
@@ -296,15 +345,30 @@ public class MainView extends javax.swing.JFrame {
                 medView.setMedicament(controller.getMedicamentFromDB(lstMeds.getSelectedValue()));
             }
         }
-    }// GEN-LAST:event_lstMedsMouseClicked
+    }//GEN-LAST:event_lstMedsMouseClicked
+
+    private void dateTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateTextMouseClicked
+        ringAlarm(controller.getAlarmsRoutine().get(lstMeds.getSelectedIndex()));
+    }//GEN-LAST:event_dateTextMouseClicked
+
+    private void btnDelAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelAllActionPerformed
+        if(JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar todos los medicamentos?", "Eliminar medicamentos", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
+            return;
+        controller.removeAllAlarmsRoutine();
+        updateList();
+        weekView.clearFields();
+        lblActualMed.setText(" ");
+    }//GEN-LAST:event_btnDelAllActionPerformed
 
     public void setMenuButtonsVisible(boolean b) {
         btnAdd.setVisible(b);
         btnDelete.setVisible(b);
+        btnDelAll.setVisible(b);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelAll;
     private javax.swing.JButton btnDelete;
     private javax.swing.JPanel content;
     private javax.swing.JLabel dateText;

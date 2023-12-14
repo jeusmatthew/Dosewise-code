@@ -59,4 +59,8 @@ public class Controller {
     public Medicament getMedicamentFromDB(String name) {
         return consultas.searchMedicament(name);
     }
+
+    public void removeAllAlarmsRoutine(){
+        model.removeAll();
+    }
 }

@@ -5,8 +5,16 @@
 package view;
 
 import java.awt.Color;
+import java.time.temporal.IsoFields;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Stack;
+
+import javax.print.attribute.standard.MediaSize.ISO;
 import javax.swing.JFrame;
 
+import model.Alarm;
 import model.AlarmRoutine;
 
 /**
@@ -57,36 +65,53 @@ public class WeekView extends javax.swing.JPanel {
         String[] vie = new String[0];
         String[] sab = new String[0];
 
-        dom = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
-                .map(alarm -> alarm.getTime().getHour() + ":" + String.format("%02d", alarm.getTime().getMinute()))
+        // Sorting inversely by time
+        List<Alarm> temp = new ArrayList<>();
+        Stack<Alarm> alarmsCopy = new Stack<>();
+        alarmsCopy.addAll(a.getAlarms());
+
+        while (!alarmsCopy.isEmpty()) {
+            temp.add(alarmsCopy.pop());
+        }
+
+        dom = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 7)
+                .map(alarm -> alarm.getTime().getHour() + ":" 
+                        + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        lun = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
+        lun = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 1)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        mar = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
+        mar = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 2)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        mier = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
+        mier = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 3)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        jue = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
+        jue = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 4)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        vie = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
+        vie = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 5)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
 
-        sab = a.getAlarms().stream().filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
+        sab = temp.stream()
+                .filter(alarm -> alarm.getTime().getDayOfWeek().getValue() == 6)
                 .map(alarm -> alarm.getTime().getHour() + ":"
                         + String.format("%02d", alarm.getTime().getMinute()))
                 .toArray(String[]::new);
@@ -165,7 +190,7 @@ public class WeekView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lunes = new javax.swing.JLabel();
@@ -250,6 +275,8 @@ public class WeekView extends javax.swing.JPanel {
         jScrollPane9.setToolTipText("");
         jScrollPane9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane9.setFocusable(false);
+
+        listaDom.setFocusable(false);
         jScrollPane9.setViewportView(listaDom);
 
         add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 100, 310));
